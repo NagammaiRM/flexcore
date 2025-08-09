@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FlexCore - Revolutionary modular footwear system with interchangeable cores. Transform every step with our innovative shoe technology.">
+  <meta name="keywords" content="modular shoes, interchangeable footwear, eco-friendly shoes, FlexCore, innovative footwear">
+  <meta name="author" content="FlexCore">
+  
+  <title>FlexCore - Transform Every Step | Modular Footwear Revolution</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="https://i.imgur.com/vjMQVmY.png" type="image/png">
+  <link rel="apple-touch-icon" href="https://i.imgur.com/vjMQVmY.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="FlexCore - Transform Every Step">
+  <meta property="og:description" content="Revolutionary modular footwear system with interchangeable cores">
+  <meta property="og:image" content="https://i.imgur.com/vjMQVmY.png">
+  <meta property="og:url" content="https://flexcore.com">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FlexCore - Transform Every Step">
+  <meta name="twitter:description" content="Revolutionary modular footwear system with interchangeable cores">
+  <meta name="twitter:image" content="https://i.imgur.com/vjMQVmY.png">
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loader">
+      <div class="loader-text">FLEXCORE</div>
+      <div class="loader-bar"></div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="navbar" class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <img src="https://i.imgur.com/vjMQVmY.png" alt="FlexCore Logo" class="nav-logo">
+        <span class="nav-title">FlexCore</span>
+      </div>
+      
+      <div class="nav-menu" id="nav-menu">
+        <a href="#home" class="nav-link active" data-section="home">Home</a>
+        <a href="#products" class="nav-link" data-section="products">Products</a>
+        <a href="#features" class="nav-link" data-section="features">Features</a>
+        <a href="#support" class="nav-link" data-section="support">Support</a>
+      </div>
+      
+      <div class="nav-toggle" id="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-bg">
+      <div class="hero-pattern"></div>
+      <div class="floating-elements">
+        <div class="floating-shoe"></div>
+        <div class="floating-particles"></div>
+      </div>
+    </div>
+    
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-text">🚀 Revolutionary Footwear</span>
+      </div>
+      
+      <h1 class="hero-title">
+        <span class="title-line">FLEX</span>
+        <span class="title-line gradient-text">CORE</span>
+      </h1>
+      
+      <p class="hero-subtitle">Transform Every Step</p>
+      
+      <p class="hero-description">
+        Revolutionary modular footwear system with interchangeable cores that adapt to your lifestyle. 
+        Switch from casual to sport, street to trail—all with one amazing pair of shoes.
+      </p>
+      
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-number">10K+</div>
+          <div class="stat-label">Happy Customers</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Core Variations</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">99%</div>
+          <div class="stat-label">Satisfaction Rate</div>
+        </div>
+      </div>
+      
+      <div class="hero-actions">
+        <a href="#products" class="btn btn-primary btn-large">
+          <span>Shop Now</span>
+          <svg class="btn-icon" viewBox="0 0 24 24">
+            <path d="M7 17l9.2-9.2M17 17H7V7"/>
+          </svg>
+        </a>
+        <a href="#features" class="btn btn-secondary btn-large">
+          <span>Learn More</span>
+          <svg class="btn-icon" viewBox="0 0 24 24">
+            <path d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    
+    <div class="scroll-indicator" onclick="smoothScrollTo('#products')">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <p class="scroll-text">Scroll Down</p>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products" class="products-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our Products</h2>
+        <p class="section-subtitle">Discover the future of footwear with our innovative modular system</p>
+      </div>
+      
+      <div class="products-filter">
+        <button class="filter-btn active" data-filter="all">All Products</button>
+        <button class="filter-btn" data-filter="base">Base Shoes</button>
+        <button class="filter-btn" data-filter="cores">Cores</button>
+        <button class="filter-btn" data-filter="kits">Starter Kits</button>
+      </div>
+      
+      <div class="products-grid">
+        <div class="product-card" data-category="base">
+          <div class="product-image-container">
+            <img src="https://i.imgur.com/GuSEaVq.png" alt="Basic Bare" class="product-image">
+            <div class="product-overlay">
+              <button class="overlay-btn" onclick="viewProduct('basic-bare')">Quick View</button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-badge">Base</div>
+            <h3 class="product-title">Basic Bare</h3>
+            <p class="product-description">The foundation of your FlexCore system. Minimalist design with maximum comfort.</p>
+            <div class="product-rating">
+              <div class="stars">★★★★★</div>
+              <span class="rating-text">(127 reviews)</span>
+            </div>
+            <div class="product-price">
+              <span class="price-current">$19.99</span>
+              <span class="price-original">$24.99</span>
+            </div>
+            <button class="btn btn-primary btn-product" onclick="addToCart('basic-bare')">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card featured" data-category="kits">
+          <div class="product-ribbon">Best Value</div>
+          <div class="product-image-container">
+            <img src="https://i.imgur.com/myAyR8N.png" alt="Starter Kit" class="product-image">
+            <div class="product-overlay">
+              <button class="overlay-btn" onclick="viewProduct('starter-kit')">Quick View</button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-badge kit">Starter Kit</div>
+            <h3 class="product-title">Complete Starter Kit</h3>
+            <p class="product-description">Perfect for beginners! Basic Bare + any 2 cores of your choice.</p>
+            <div class="product-rating">
+              <div class="stars">★★★★★</div>
+              <span class="rating-text">(89 reviews)</span>
+            </div>
+            <div class="product-price">
+              <span class="price-current">$94.99</span>
+              <span class="price-original">$109.97</span>
+              <span class="price-save">Save $14.98!</span>
+            </div>
+            <button class="btn btn-primary btn-product" onclick="addToCart('starter-kit')">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="cores">
+          <div class="product-image-container">
+            <img src="https://i.imgur.com/MfhviPW.png" alt="Casual Cores" class="product-image">
+            <div class="product-overlay">
+              <button class="overlay-btn" onclick="viewProduct('casual-cores')">Quick View</button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-badge core">Core</div>
+            <h3 class="product-title">Casual Cores</h3>
+            <p class="product-description">Versatile cores perfect for everyday wear and social events.</p>
+            <div class="product-rating">
+              <div class="stars">★★★★☆</div>
+              <span class="rating-text">(203 reviews)</span>
+            </div>
+            <div class="product-price">
+              <span class="price-current">$19.99</span>
+            </div>
+            <button class="btn btn-primary btn-product" onclick="addToCart('casual-cores')">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="cores">
+          <div class="product-image-container">
+            <img src="http://i.imgur.com/KmfodAU.png" alt="Cleat Cores" class="product-image">
+            <div class="product-overlay">
+              <button class="overlay-btn" onclick="viewProduct('cleat-cores')">Quick View</button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-badge core">Core</div>
+            <h3 class="product-title">Professional Cleat Cores</h3>
+            <p class="product-description">Soccer cleats recommended by top coaches worldwide.</p>
+            <div class="product-rating">
+              <div class="stars">★★★★★</div>
+              <span class="rating-text">(156 reviews)</span>
+            </div>
+            <div class="product-price">
+              <span class="price-current">$19.99</span>
+            </div>
+            <button class="btn btn-primary btn-product" onclick="addToCart('cleat-cores')">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="cores">
+          <div class="product-image-container">
+            <img src="https://i.imgur.com/MuvrLOV.png" alt="Roller Cores" class="product-image">
+            <div class="product-overlay">
+              <button class="overlay-btn" onclick="viewProduct('roller-cores')">Quick View</button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-badge core">Core</div>
+            <h3 class="product-title">Roller Cores</h3>
+            <p class="product-description">Smooth rolling action for urban exploration and fun.</p>
+            <div class="product-rating">
+              <div class="stars">★★★★☆</div>
+              <span class="rating-text">(78 reviews)</span>
+            </div>
+            <div class="product-price">
+              <span class="price-current">$19.99</span>
+            </div>
+            <button class="btn btn-primary btn-product" onclick="addToCart('roller-cores')">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="cores">
+          <div class="product-image-container">
+            <img src="https://i.imgur.com/kyuImHk.png" alt="Running Cores" class="product-image">
+            <div class="product-overlay">
+              <button class="overlay-btn" onclick="viewProduct('running-cores')">Quick View</button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-badge core">Core</div>
+            <h3 class="product-title">Performance Running Cores</h3>
+            <p class="product-description">Lightweight, responsive cushioning for serious runners.</p>
+            <div class="product-rating">
+              <div class="stars">★★★★★</div>
+              <span class="rating-text">(234 reviews)</span>
+            </div>
+            <div class="product-price">
+              <span class="price-current">$19.99</span>
+            </div>
+            <button class="btn btn-primary btn-product" onclick="addToCart('running-cores')">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="products-cta">
+        <a href="pages/shop.html" class="btn btn-outline btn-large">
+          View All Products
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Why Choose FlexCore?</h2>
+        <p class="section-subtitle">Revolutionary features that transform your footwear experience</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 2L2 7v10c0 5.55 3.84 10 9 11 1.16-1 9-5.45 9-11V7l-10-5z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Modular Innovation</h3>
+          <p class="feature-description">
+            Revolutionary interchangeable system lets you switch between cores in seconds. 
+            One shoe base, unlimited possibilities.
+          </p>
+          <div class="feature-link">
+            <a href="#" class="link-with-arrow">Learn more about modularity</a>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Peak Performance</h3>
+          <p class="feature-description">
+            Each core is engineered for specific activities - from marathon running to street skating, 
+            we've got your feet covered.
+          </p>
+          <div class="feature-link">
+            <a href="#" class="link-with-arrow">Explore performance specs</a>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Sustainable Future</h3>
+          <p class="feature-description">
+            Made from 70% recycled materials with carbon-neutral shipping. 
+            Look good while doing good for the planet.
+          </p>
+          <div class="feature-link">
+            <a href="#" class="link-with-arrow">See sustainability report</a>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M14 9V5a3 3 0 0 0-6 0v4"/>
+              <rect x="2" y="9" width="20" height="11" rx="2" ry="2"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Secure Attachment</h3>
+          <p class="feature-description">
+            Patented QuickLock™ system ensures cores stay firmly attached during any activity. 
+            No slipping, no sliding, just confidence.
+          </p>
+          <div class="feature-link">
+            <a href="#" class="link-with-arrow">How QuickLock works</a>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M3 6h18l-2 9H7L5 4H2"/>
+              <circle cx="9" cy="20" r="1"/>
+              <circle cx="20" cy="20" r="1"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Smart Investment</h3>
+          <p class="feature-description">
+            Why buy 10 pairs when you can have endless variety with one base? 
+            Save money and closet space.
+          </p>
+          <div class="feature-link">
+            <a href="#" class="link-with-arrow">Calculate your savings</a>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4v-7zM15 11h4a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2h-4v-7z"/>
+              <path d="M9 7H5a2 2 0 0 0-2 2v2h6V7zM15 7h4a2 2 0 0 1 2 2v2h-6V7z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Easy Maintenance</h3>
+          <p class="feature-description">
+            Detachable cores mean easier cleaning and longer lifespan. 
+            Keep your shoes looking fresh with minimal effort.
+          </p>
+          <div class="feature-link">
+            <a href="#" class="link-with-arrow">Care instructions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <p class="section-subtitle">Join thousands of happy FlexCore users</p>
+      </div>
+      
+      <div class="testimonials-slider">
+        <div class="testimonial-card active">
+          <div class="testimonial-content">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">
+              "FlexCore completely changed my approach to footwear. I can go from a morning jog to an evening event 
+              with the same base shoe. It's revolutionary!"
+            </p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=64&h=64&fit=crop&crop=face" alt="Alex Chen" class="author-avatar">
+              <div class="author-info">
+                <div class="author-name">Alex Chen</div>
+                <div class="author-title">Marathon Runner</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">
+              "As someone who travels constantly for work, FlexCore has been a game-changer. 
+              I pack one base and multiple cores - saves so much space!"
+            </p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1494790108755-2616b612b029?w=64&h=64&fit=crop&crop=face" alt="Sarah Johnson" class="author-avatar">
+              <div class="author-info">
+                <div class="author-name">Sarah Johnson</div>
+                <div class="author-title">Business Consultant</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">
+              "The build quality is incredible. I've been using my FlexCore shoes for 8 months now, 
+              and they still look brand new. Worth every penny!"
+            </p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&fit=crop&crop=face" alt="Mike Rodriguez" class="author-avatar">
+              <div class="author-info">
+                <div class="author-name">Mike Rodriguez</div>
+                <div class="author-title">Fitness Enthusiast</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonials-nav">
+        <button class="nav-dot active" onclick="showTestimonial(0)"></button>
+        <button class="nav-dot" onclick="showTestimonial(1)"></button>
+        <button class="nav-dot" onclick="showTestimonial(2)"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Support Section -->
+  <section id="support" class="support-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Get Support</h2>
+        <p class="section-subtitle">We're here to help you every step of the way</p>
+      </div>
+      
+      <div class="support-grid">
+        <div class="support-info">
+          <h3 class="support-title">Need Help?</h3>
+          <p class="support-description">
+            Our support team is available 24/7 to answer your questions and help you get the most out of your FlexCore shoes.
+          </p>
+          
+          <div class="support-features">
+            <div class="support-feature">
+              <div class="feature-icon-small">⚡</div>
+              <div>
+                <h4>Fast Response</h4>
+                <p>Average response time under 2 hours</p>
+              </div>
+            </div>
+            <div class="support-feature">
+              <div class="feature-icon-small">🎯</div>
+              <div>
+                <h4>Expert Help</h4>
+                <p>Trained specialists for technical questions</p>
+              </div>
+            </div>
+            <div class="support-feature">
+              <div class="feature-icon-small">💬</div>
+              <div>
+                <h4>Multiple Channels</h4>
+                <p>Email, chat, phone, and social media</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <form class="support-form" id="supportForm">
+          <div class="form-group">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" id="name" name="name" class="form-input" required placeholder="Enter your full name">
+          </div>
+          
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" name="email" class="form-input" required placeholder="your@email.com">
+          </div>
+          
+          <div class="form-group">
+            <label for="subject" class="form-label">Subject</label>
+            <select id="subject" name="subject" class="form-select" required>
+              <option value="">Choose a topic</option>
+              <option value="product-inquiry">Product Inquiry</option>
+              <option value="order-status">Order Status</option>
+              <option value="technical-support">Technical Support</option>
+              <option value="returns">Returns & Exchanges</option>
+              <option value="warranty">Warranty Claim</option>
+              <option value="feedback">General Feedback</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="message" class="form-label">Message</label>
+            <textarea id="message" name="message" class="form-textarea" rows="5" required placeholder="How can we help you today?"></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary btn-large btn-full-width">
+            <span>Send Message</span>
+            <svg class="btn-icon" viewBox="0 0 24 24">
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+            </svg>
+          </button>
+          
+          <div id="form-status" class="form-status"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-content">
+        <div class="newsletter-info">
+          <h3 class="newsletter-title">Stay Updated</h3>
+          <p class="newsletter-description">
+            Get the latest updates on new cores, exclusive offers, and FlexCore community events.
+          </p>
+        </div>
+        
+        <form class="newsletter-form" id="newsletter-form">
+          <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="footer-brand">
+            <img src="https://i.imgur.com/vjMQVmY.png" alt="FlexCore Logo" class="footer-logo">
+            <h3 class="footer-brand-name">FlexCore</h3>
+          </div>
+          <p class="footer-description">
+            Revolutionary modular footwear system that transforms every step. 
+            Join the future of shoes today.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-link" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <svg viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="YouTube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-section">
+          <h4 class="footer-heading">Products</h4>
+          <ul class="footer-links">
+            <li><a href="pages/shop.html">All Products</a></li>
+            <li><a href="pages/shop.html?filter=base">Base Shoes</a></li>
+            <li><a href="pages/shop.html?filter=cores">Cores Collection</a></li>
+            <li><a href="pages/shop.html?filter=kits">Starter Kits</a></li>
+            <li><a href="#" onclick="showComingSoon()">Accessories</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4 class="footer-heading">Support</h4>
+          <ul class="footer-links">
+            <li><a href="pages/support.html">Help Center</a></li>
+            <li><a href="pages/support.html#faq">FAQ</a></li>
+            <li><a href="pages/support.html#returns">Returns & Exchanges</a></li>
+            <li><a href="pages/support.html#warranty">Warranty</a></li>
+            <li><a href="pages/support.html#contact">Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="pages/about.html">About FlexCore</a></li>
+            <li><a href="pages/sustainability.html">Sustainability</a></li>
+            <li><a href="pages/careers.html">Careers</a></li>
+            <li><a href="pages/press.html">Press Kit</a></li>
+            <li><a href="pages/blog.html">Blog</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-legal">
+          <p>&copy; 2024 FlexCore. All rights reserved.</p>
+          <div class="legal-links">
+            <a href="pages/privacy.html">Privacy Policy</a>
+            <a href="pages/terms.html">Terms of Service</a>
+            <a href="pages/cookies.html">Cookie Policy</a>
+          </div>
+        </div>
+        <div class="footer-payment">
+          <div class="payment-methods">
+            <img src="https://img.shields.io/badge/Visa-1A1F71?style=flat&logo=visa&logoColor=white" alt="Visa">
+            <img src="https://img.shields.io/badge/Mastercard-EB001B?style=flat&logo=mastercard&logoColor=white" alt="Mastercard">
+            <img src="https://img.shields.io/badge/PayPal-00457C?style=flat&logo=paypal&logoColor=white" alt="PayPal">
+            <img src="https://img.shields.io/badge/Apple_Pay-000000?style=flat&logo=apple-pay&logoColor=white" alt="Apple Pay">
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Chatbot -->
+  <div class="chatbot-toggle" id="chatbot-toggle">
+    💬
+  </div>
+  
+  <div class="chatbot-container" id="chatbot-container">
+    <div class="chatbot-header">
+      <div class="chatbot-info">
+        <div class="bot-avatar">🤖</div>
+        <div>
+          <div class="bot-name">FlexBot</div>
+          <div class="bot-status">Online</div>
+        </div>
+      </div>
+      <div class="chatbot-controls">
+        <button class="control-btn" onclick="toggleDarkMode()" title="Toggle Dark Mode">🌓</button>
+        <button class="control-btn" onclick="toggleChatbot()" title="Close Chat">✕</button>
+      </div>
+    </div>
+    
+    <div class="chatbot-messages" id="chatbot-messages">
+      <div class="message bot-message">
+        <div class="message-avatar">🤖</div>
+        <div class="message-content">
+          <p>Hi there! Welcome to FlexCore! 👋</p>
+          <p>I'm here to help you with any questions about our modular footwear system. How can I assist you today?</p>
+        </div>
+        <div class="message-time">Just now</div>
+      </div>
+    </div>
+    
+    <div class="chatbot-quick-replies">
+      <button class="quick-reply" onclick="handleQuickReply('How does FlexCore work?')">
+        How it works
+      </button>
+      <button class="quick-reply" onclick="handleQuickReply('What are the shipping options?')">
+        Shipping info
+      </button>
+      <button class="quick-reply" onclick="handleQuickReply('Can I return my order?')">
+        Returns
+      </button>
+    </div>
+    
+    <form class="chatbot-input-form" onsubmit="sendMessage(event)">
+      <input type="text" id="chatbot-input" placeholder="Type your message..." autocomplete="off">
+      <button type="submit" class="send-btn">
+        <svg viewBox="0 0 24 24">
+          <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+        </svg>
+      </button>
+    </form>
+  </div>
+
+  <!-- Cart Sidebar -->
+  <div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+      <h3>Shopping Cart</h3>
+      <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+    
+    <div class="cart-items" id="cart-items">
+      <div class="empty-cart">
+        <div class="empty-cart-icon">🛒</div>
+        <p>Your cart is empty</p>
+        <button class="btn btn-primary" onclick="toggleCart(); smoothScrollTo('#products');">
+          Start Shopping
+        </button>
+      </div>
+    </div>
+    
+    <div class="cart-footer" id="cart-footer" style="display: none;">
+      <div class="cart-total">
+        <div class="total-line">
+          <span>Subtotal:</span>
+          <span id="cart-subtotal">$0.00</span>
+        </div>
+        <div class="total-line">
+          <span>Shipping:</span>
+          <span>FREE</span>
+        </div>
+        <div class="total-line total">
+          <span>Total:</span>
+          <span id="cart-total">$0.00</span>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full-width" onclick="proceedToCheckout()">
+        Proceed to Checkout
+      </button>
+    </div>
+  </div>
+
+  <!-- Cart Overlay -->
+  <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+  <!-- Product Modal -->
+  <div class="product-modal" id="product-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">Product Details</h3>
+        <button class="modal-close" onclick="closeProductModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <!-- Product details will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeProductModal()"></div>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="back-to-top" onclick="smoothScrollTo('#home')" title="Back to top">
+    <svg viewBox="0 0 24 24">
+      <path d="M7 14l5-5 5 5"/>
+    </svg>
+  </button>
+
+  <!-- JavaScript Files -->
+  <script src="js/main.js"></script>
+  <script src="js/chatbot.js"></script>
+  <script src="js/animations.js"></script>
+  
+  <!-- Performance and Analytics -->
+  <script>
+    // Simple performance tracking
+    window.addEventListener('load', () => {
+      const loadTime = performance.now();
+      console.log(`Page loaded in ${Math.round(loadTime)}ms`);
+    });
+    
+    // Simple analytics (replace with your analytics service)
+    function trackEvent(category, action, label) {
+      console.log(`Analytics: ${category} - ${action} - ${label}`);
+      // gtag('event', action, { event_category: category, event_label: label });
+    }
+  </script>
+</body>
+</html>
