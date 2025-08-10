@@ -9,7 +9,7 @@ let isMenuOpen = false;
 const navbar = document.getElementById('navbar');
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
-const loadingScreen = document.getElementById('loading-screen');
+const loadingScreen = document.getElementById('loading-screen'); // fixed duplicate & match HTML id
 const backToTopBtn = document.getElementById('back-to-top');
 
 // Initialize the application
@@ -30,9 +30,6 @@ function initializeApp() {
     setupBackToTop();
     trackAnalytics();
 }
-
-// Get the loading screen element
-const loadingScreen = document.getElementById('loadingScreen');
 
 // Fixed Loading Screen Handler with Guaranteed Timeout
 function handleLoading() {
@@ -80,9 +77,6 @@ function hideLoadingScreen() {
 function handleLoadingInstant() {
     hideLoadingScreen();
 }
-
-// Start the handler
-handleLoading();
 
 // Navigation Setup
 function setupNavigation() {
@@ -242,3 +236,6 @@ function setupProductFilters() {
             btn.classList.add('active');
             
             // Filter products
+        });
+    });
+}
