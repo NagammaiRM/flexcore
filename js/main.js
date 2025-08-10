@@ -41,7 +41,7 @@ function handleLoading() {
                     loadingScreen.style.display = 'none';
                 }, 500);
             }
-        }, 1000);
+        }, 300);
     });
 }
 
