@@ -31,19 +31,64 @@ function initializeApp() {
     trackAnalytics();
 }
 
-// Loading Screen
+// Fixed Loading Screen Handler
 function handleLoading() {
+    // Check if page is already loaded
+    if (document.readyState === 'complete') {
+        hideLoadingScreen();
+        return;
+    }
+    
+    // Set a maximum loading time to prevent infinite loading
+    const maxLoadingTime = 3000; // 3 seconds max
+    const loadingTimeout = setTimeout(() => {
+        console.warn('Loading timeout reached, hiding loading screen');
+        hideLoadingScreen();
+    }, maxLoadingTime);
+    
+    // Hide loading screen when page loads
     window.addEventListener('load', () => {
+        clearTimeout(loadingTimeout);
+        // Reduce delay or remove it entirely
         setTimeout(() => {
-            if (loadingScreen) {
-                loadingScreen.classList.add('hidden');
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                }, 500);
-            }
-        }, 300);
+            hideLoadingScreen();
+        }, 300); // Reduced from 1000ms to 300ms
     });
+    
+    // Also try hiding on DOMContentLoaded for faster perceived loading
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            // Small delay to ensure smooth transition
+            setTimeout(() => {
+                if (loadingScreen && !loadingScreen.classList.contains('hidden')) {
+                    hideLoadingScreen();
+                }
+            }, 500);
+        });
+    }
 }
+
+function hideLoadingScreen() {
+    if (loadingScreen) {
+        loadingScreen.classList.add('hidden');
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+        }, 500);
+    }
+}
+
+// Alternative: Immediate loading screen removal (if you want instant loading)
+function handleLoadingInstant() {
+    if (loadingScreen) {
+        loadingScreen.classList.add('hidden');
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+        }, 500);
+    }
+}
+
+// Call this version in initializeApp() if you want instant loading:
+// handleLoadingInstant();
 
 // Navigation Setup
 function setupNavigation() {
