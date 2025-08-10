@@ -31,45 +31,44 @@ function initializeApp() {
     trackAnalytics();
 }
 
-// Fixed Loading Screen Handler
+// Get the loading screen element
+const loadingScreen = document.getElementById('loadingScreen');
+
+// Fixed Loading Screen Handler with Guaranteed Timeout
 function handleLoading() {
-    // Check if page is already loaded
+    if (!loadingScreen) {
+        console.error('Loading screen element not found.');
+        return;
+    }
+
+    // Always hide after 3 seconds (no matter what)
+    setTimeout(() => {
+        hideLoadingScreen();
+    }, 3000);
+
+    // If the document is already fully loaded, hide immediately
     if (document.readyState === 'complete') {
         hideLoadingScreen();
         return;
     }
-    
-    // Set a maximum loading time to prevent infinite loading
-    const maxLoadingTime = 3000; // 3 seconds max
-    const loadingTimeout = setTimeout(() => {
-        console.warn('Loading timeout reached, hiding loading screen');
-        hideLoadingScreen();
-    }, maxLoadingTime);
-    
-    // Hide loading screen when page loads
+
+    // Hide on full page load
     window.addEventListener('load', () => {
-        clearTimeout(loadingTimeout);
-        // Reduce delay or remove it entirely
         setTimeout(() => {
             hideLoadingScreen();
-        }, 300); // Reduced from 1000ms to 300ms
+        }, 300);
     });
-    
-    // Also try hiding on DOMContentLoaded for faster perceived loading
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            // Small delay to ensure smooth transition
-            setTimeout(() => {
-                if (loadingScreen && !loadingScreen.classList.contains('hidden')) {
-                    hideLoadingScreen();
-                }
-            }, 500);
-        });
-    }
+
+    // Hide on DOM ready for faster perception
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            hideLoadingScreen();
+        }, 500);
+    });
 }
 
 function hideLoadingScreen() {
-    if (loadingScreen) {
+    if (!loadingScreen.classList.contains('hidden')) {
         loadingScreen.classList.add('hidden');
         setTimeout(() => {
             loadingScreen.style.display = 'none';
@@ -77,18 +76,13 @@ function hideLoadingScreen() {
     }
 }
 
-// Alternative: Immediate loading screen removal (if you want instant loading)
+// Optional: Instant removal
 function handleLoadingInstant() {
-    if (loadingScreen) {
-        loadingScreen.classList.add('hidden');
-        setTimeout(() => {
-            loadingScreen.style.display = 'none';
-        }, 500);
-    }
+    hideLoadingScreen();
 }
 
-// Call this version in initializeApp() if you want instant loading:
-// handleLoadingInstant();
+// Start the handler
+handleLoading();
 
 // Navigation Setup
 function setupNavigation() {
