@@ -68,63 +68,72 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <div class="hero-bg">
-      <div class="hero-pattern"></div>
-      <div class="floating-elements">
-        <div class="floating-shoe"></div>
-        <div class="floating-particles"></div>
-      </div>
+ <!-- Updated Hero Section with View All Products Link -->
+<section class="hero" id="hero">
+    <div class="hero-pattern"></div>
+    <div class="container">
+        <div class="hero-content fade-in">
+            <div class="hero-badge">
+                <span class="badge-text">🚀 Now Available</span>
+            </div>
+            
+            <h1 class="hero-title">
+                The Future of
+                <span class="gradient-text">Footwear</span>
+            </h1>
+            
+            <h2 class="hero-subtitle">One Shoe, Infinite Possibilities</h2>
+            
+            <p class="hero-description">
+                Transform your shoes instantly with FlexCore's revolutionary modular system. 
+                From running to formal wear, adapt to any situation with just one pair.
+            </p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Core Styles</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">50K+</span>
+                    <span class="stat-label">Happy Users</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">30s</span>
+                    <span class="stat-label">Quick Switch</span>
+                </div>
+            </div>
+            
+            <div class="hero-actions">
+                <button class="btn btn-primary btn-large" onclick="viewAllProducts()">
+                    View All Products
+                </button>
+                <button class="btn btn-secondary btn-large" onclick="smoothScrollTo('#features')">
+                    Learn More
+                </button>
+            </div>
+        </div>
     </div>
-    
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="badge-text">🚀 Revolutionary Footwear</span>
-      </div>
-      
-      <h1 class="hero-title">
-        <span class="title-line">FLEX</span>
-        <span class="title-line gradient-text">CORE</span>
-      </h1>
-      
-      <p class="hero-subtitle">Transform Every Step</p>
-      
-      <p class="hero-description">
-        Revolutionary modular footwear system with interchangeable cores that adapt to your lifestyle. 
-        Switch from casual to sport, street to trail—all with one amazing pair of shoes.
-      </p>
-      
-      <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-number">10K+</div>
-          <div class="stat-label">Happy Customers</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">50+</div>
-          <div class="stat-label">Core Variations</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">99%</div>
-          <div class="stat-label">Satisfaction Rate</div>
-        </div>
-      </div>
-      
-      <div class="hero-actions">
-        <a href="#products" class="btn btn-primary btn-large">
-          <span>Shop Now</span>
-          <svg class="btn-icon" viewBox="0 0 24 24">
-            <path d="M7 17l9.2-9.2M17 17H7V7"/>
-          </svg>
-        </a>
-        <a href="#features" class="btn btn-secondary btn-large">
-          <span>Learn More</span>
-          <svg class="btn-icon" viewBox="0 0 24 24">
-            <path d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-          </svg>
-        </a>
-      </div>
+</section>
+
+<!-- Update the product card prices in your main page -->
+<!-- Basic Bare product card - update the price -->
+<div class="product-card" data-category="foundation">
+    <div class="product-image">
+        <img src="https://i.imgur.com/GuSEaVq.png" alt="Basic Bare">
     </div>
+    <div class="product-content">
+        <h3 class="product-title">Basic Bare</h3>
+        <p class="product-description">The foundation of your FlexCore system. Minimalist design with maximum comfort.</p>
+        <div class="product-price">
+            <span class="price-current">$59.99</span> <!-- Updated price -->
+        </div>
+        <div class="product-actions">
+            <button class="btn btn-secondary btn-product" onclick="viewProduct('basic-bare')">View Details</button>
+            <button class="btn btn-primary btn-product" onclick="addToCart('basic-bare')">Add to Cart</button>
+        </div>
+    </div>
+</div>
     
     <div class="scroll-indicator" onclick="smoothScrollTo('#products')">
       <div class="scroll-mouse">
