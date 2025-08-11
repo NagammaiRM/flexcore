@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cost-Effective Calculator - FlexCore</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .calculator-hero {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            padding: 8rem 0 4rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .calculator-section {
+            padding: 6rem 0;
+        }
+        
+        .calculator-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+        
+        .calculator-form {
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border);
+        }
+        
+        .form-group {
+            margin-bottom: 2rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            background: var(--background);
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        
+        .slider-group {
+            margin: 1rem 0;
+        }
+        
+        .slider {
+            width: 100%;
+            margin: 1rem 0;
+        }
+        
+        .slider-value {
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+        
+        .results-panel {
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border);
+            position: sticky;
+            top: 2rem;
+        }
+        
+        .savings-display {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .savings-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .comparison-chart {
+            margin: 2rem 0;
+        }
+        
+        .chart-bar {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+        }
+        
+        .chart-label {
+            width: 120px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .chart-bar-bg {
+            flex: 1;
+            height: 30px;
+            background: var(--border);
+            border-radius: 15px;
+            position: relative;
+            margin: 0 1rem;
+        }
+        
+        .chart-bar-fill {
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.8s ease;
+        }
+        
+        .traditional-fill { background: #ff6b6b; }
+        .flexcore-fill { background: var(--primary); }
+        
+        .chart-value {
+            min-width: 80px;
+            font-weight: 600;
+            text-align: right;
+        }
+        
+        .breakdown-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .breakdown-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .environmental-impact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .impact-stat {
+            text-align: center;
+        }
+        
+        .impact-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .calculator-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .results-panel {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <img src="https://i.imgur.com/rQJ8wvO.png" alt="FlexCore Logo" class="nav-logo">
+                    <span class="nav-title">FlexCore</span>
+                </div>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="products.html" class="nav-link">Products</a>
+                    <a href="index.html#features" class="nav-link">Features</a>
+                    <a href="index.html#support" class="nav-link">Support</a>
+                </div>
+                
+                <div class="nav-actions">
+                    <button class="cart-btn" onclick="toggleCart()">
+                        🛒 <span class="cart-badge">0</span>
+                    </button>
+                    <button class="nav-toggle" id="nav-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Calculator Hero -->
+    <section class="calculator-hero">
+        <div class="container">
+            <h1>💰 Cost-Effective Calculator</h1>
+            <p>See how much money you can save with FlexCore's modular system compared to buying multiple traditional shoes</p>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="calculator-section">
+        <div class="container">
+            <div class="calculator-container">
+                
+                <!-- Calculator Form -->
+                <div class="calculator-form">
+                    <h3>Your Shoe Preferences</h3>
+                    
+                    <div class="form-group">
+                        <label>How many different shoe styles do you typically own?</label>
+                        <div class="slider-group">
+                            <input type="range" class="slider" id="shoeCount" min="3" max="20" value="8" oninput="updateCalculation()">
+                            <div class="slider-value" id="shoeCountValue">8 pairs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Average price you spend per pair of shoes</label>
+                        <div class="slider-group">
+                            <input type="range" class="slider" id="avgPrice" min="50" max="300" value="120" oninput="updateCalculation()">
+                            <div class="slider-value" id="avgPriceValue">$120</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>How often do you replace your shoes? (years)</label>
+                        <div class="slider-group">
+                            <input type="range" class="slider" id="replaceFreq" min="1" max="5" value="2" step="0.5" oninput="updateCalculation()">
+                            <div class="slider-value" id="replaceFreqValue">2 years</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Which activities do you need shoes for?</label>
+                        <div style="margin-top: 1rem;">
+                            <label style="display: flex; align-items: center; margin: 0.5rem 0;">
+                                <input type="checkbox" checked onchange="updateCalculation()"> Running/Exercise
+                            </label>
+                            <label style="display: flex; align-items: center; margin: 0.5rem 0;">
+                                <input type="checkbox" checked onchange="updateCalculation()"> Casual/Everyday
+                            </label>
+                            <label style="display: flex; align-items: center; margin: 0.5rem 0;">
+                                <input type="checkbox" onchange="updateCalculation()"> Formal/Business
+                            </label>
+                            <label style="display: flex; align-items: center; margin: 0.5rem 0;">
+                                <input type="checkbox" onchange="updateCalculation()"> Sports/Cleats
+                            </label>
+                            <label style="display: flex; align-items: center; margin: 0.5rem 0;">
+                                <input type="checkbox" onchange="updateCalculation()"> Winter/Boots
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Results Panel -->
+                <div class="results-panel">
+                    <h3>Your Savings with FlexCore</h3>
+                    
+                    <div class="savings-display">
+                        <div class="savings-amount" id="totalSavings">$0</div>
+                        <div>Total Savings Over 5 Years</div>
+                    </div>
+                    
+                    <div class="comparison-chart">
+                        <div class="chart-bar">
+                            <div class="chart-label">Traditional</div>
+                            <div class="chart-bar-bg">
+                                <div class="chart-bar-fill traditional-fill" id="traditionalBar"></div>
+                            </div>
+                            <div class="chart-value" id="traditionalCost">$0</div>
+                        </div>
+                        
+                        <div class="chart-bar">
+                            <div class="chart-label">FlexCore</div>
+                            <div class="chart-bar-bg">
+                                <div class="chart-bar-fill flexcore-fill" id="flexcoreBar"></div>
+                            </div>
+                            <div class="chart-value" id="flexcoreCost">$0</div>
+                        </div>
+                    </div>
+                    
+                    <h4>Cost Breakdown</h4>
+                    <ul class="breakdown-list" id="breakdown">
+                        <!-- Populated by JavaScript -->
+                    </ul>
+                    
+                    <div class="environmental-impact">
+                        <h4>🌍 Environmental Impact</h4>
+                        <p>By choosing FlexCore, you're also helping the environment!</p>
+                        <div class="impact-stats">
+                            <div class="impact-stat">
+                                <span class="impact-number" id="shoesReduced">0</span>
+                                <span>Fewer Shoes</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="impact-number" id="wasteReduced">0</span>
+                                <span>lbs Waste Saved</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="impact-number" id="co2Reduced">0</span>
+                                <span>lbs CO₂ Saved</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function updateCalculation() {
+            // Get form values
+            const shoeCount = document.getElementById('shoeCount').value;
+            const avgPrice = document.getElementById('avgPrice').value;
+            const replaceFreq = document.getElementById('replaceFreq').value;
+            
+            // Update slider displays
+            document.getElementById('shoeCountValue').textContent = shoeCount + ' pairs';
+            document.getElementById('avgPriceValue').textContent = '$' + avgPrice;
+            document.getElementById('replaceFreqValue').textContent = replaceFreq + ' years';
+            
+            // Calculate costs over 5 years
+            const years = 5;
+            const replacementCycles = years / parseFloat(replaceFreq);
+            
+            // Traditional shoe cost
+            const traditionalCost = shoeCount * avgPrice * replacementCycles;
+            
+            // FlexCore cost (1 base shoe + cores)
+            const baseShoeCost = 59.99;
+            const corePrice = 19.99;
+            const coreCount = Math.min(shoeCount, 10); // Max 10 core types available
+            const flexcoreCost = (baseShoeCost + (coreCount * corePrice)) * replacementCycles;
+            
+            // Calculate savings
+            const savings = traditionalCost - flexcoreCost;
+            
+            // Update displays
+            document.getElementById('totalSavings').textContent = '$' + Math.max(0, savings).toFixed(0);
+            document.getElementById('traditionalCost').textContent = '$' + traditionalCost.toFixed(0);
+            document.getElementById('flexcoreCost').textContent = '$' + flexcoreCost.toFixed(0);
+            
+            // Update chart bars
+            const maxCost = Math.max(traditionalCost, flexcoreCost);
+            const traditionalWidth = (traditionalCost / maxCost) * 100;
+            const flexcoreWidth = (flexcoreCost / maxCost) * 100;
+            
+            document.getElementById('traditionalBar').style.width = traditionalWidth + '%';
+            document.getElementById('flexcoreBar').style.width = flexcoreWidth + '%';
+            
+            // Update breakdown
+            const breakdown = document.getElementById('breakdown');
+            breakdown.innerHTML = `
+                <li><span>Traditional Shoes (${shoeCount} pairs)</span><span>$${traditionalCost.toFixed(0)}</span></li>
+                <li><span>FlexCore Base Shoe</span><span>$${(baseShoeCost * replacementCycles).toFixed(0)}</span></li>
+                <li><span>FlexCore Cores (${coreCount} types)</span><span>$${(coreCount * corePrice * replacementCycles).toFixed(0)}</span></li>
+                <li style="border-top: 2px solid var(--primary); font-weight: 700; color: var(--accent);"><span>Your Savings</span><span>$${Math.max(0, savings).toFixed(0)}</span></li>
+            `;
+            
+            // Environmental impact
+            const shoesReduced = Math.max(0, shoeCount - 1) * replacementCycles;
+            const wasteReduced = shoesReduced * 2.5; // Average shoe weight
+            const co2Reduced = shoesReduced * 30; // CO2 per shoe production
+            
+            document.getElementById('shoesReduced').textContent = Math.round(shoesReduced);
+            document.getElementById('wasteReduced').textContent = Math.round(wasteReduced);
+            document.getElementById('co2Reduced').textContent = Math.round(co2Reduced);
+        }
+        
+        // Initialize calculation on page load
+        document.addEventListener('DOMContentLoaded', updateCalculation);
+    </script>
+</body>
+</html>
