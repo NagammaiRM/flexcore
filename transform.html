@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Transform - FlexCore</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .feature-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 8rem 0 4rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .demo-section {
+            padding: 6rem 0;
+            background: var(--background);
+        }
+        
+        .transform-demo {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .shoe-container {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            margin: 3rem auto;
+            perspective: 1000px;
+        }
+        
+        .shoe-base {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.imgur.com/GuSEaVq.png') center/contain no-repeat;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .shoe-core {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: scale(0.8) rotateY(180deg);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .shoe-core.active {
+            opacity: 1;
+            transform: scale(1) rotateY(0deg);
+        }
+        
+        .core-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .core-btn {
+            padding: 1rem;
+            background: var(--surface);
+            border: 2px solid transparent;
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            text-align: center;
+        }
+        
+        .core-btn:hover, .core-btn.active {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        }
+        
+        .core-btn img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timer-display {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .stat-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+        
+        .challenge-section {
+            background: var(--surface);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .challenge-timer {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 2rem 0;
+        }
+        
+        .challenge-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+        
+        .challenge-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <img src="https://i.imgur.com/rQJ8wvO.png" alt="FlexCore Logo" class="nav-logo">
+                    <span class="nav-title">FlexCore</span>
+                </div>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="products.html" class="nav-link">Products</a>
+                    <a href="index.html#features" class="nav-link">Features</a>
+                    <a href="index.html#support" class="nav-link">Support</a>
+                </div>
+                
+                <div class="nav-actions">
+                    <button class="cart-btn" onclick="toggleCart()">
+                        🛒 <span class="cart-badge">0</span>
+                    </button>
+                    <button class="nav-toggle" id="nav-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Feature Hero -->
+    <section class="feature-hero">
+        <div class="container">
+            <h1>⚡ Instant Transform</h1>
+            <p>Experience the lightning-fast core switching that makes FlexCore revolutionary. Transform your shoes in under 30 seconds!</p>
+        </div>
+    </section>
+
+    <!-- Interactive Demo -->
+    <section class="demo-section">
+        <div class="container">
+            <div class="transform-demo">
+                <h2>Try It Yourself!</h2>
+                <p>Click on different cores below to see the transformation in action</p>
+                
+                <div class="timer-display" id="timer">00:00</div>
+                
+                <div class="shoe-container">
+                    <div class="shoe-base" id="shoe-base"></div>
+                    <div class="shoe-core" id="shoe-core"></div>
+                </div>
+                
+                <div class="core-selector">
+                    <div class="core-btn active" onclick="switchCore('casual', 'https://i.imgur.com/MfhviPW.png')">
+                        <img src="https://i.imgur.com/MfhviPW.png" alt="Casual">
+                        <div>Casual</div>
+                    </div>
+                    <div class="core-btn" onclick="switchCore('running', 'https://i.imgur.com/kyuImHk.png')">
+                        <img src="https://i.imgur.com/kyuImHk.png" alt="Running">
+                        <div>Running</div>
+                    </div>
+                    <div class="core-btn" onclick="switchCore('cleat', 'http://i.imgur.com/KmfodAU.png')">
+                        <img src="http://i.imgur.com/KmfodAU.png" alt="Cleats">
+                        <div>Sports</div>
+                    </div>
+                    <div class="core-btn" onclick="switchCore('roller', 'https://i.imgur.com/MuvrLOV.png')">
+                        <img src="https://i.imgur.com/MuvrLOV.png" alt="Roller">
+                        <div>Roller</div>
+                    </div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number" id="switch-count">0</span>
+                        <div>Switches Made</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="avg-time">0.0s</span>
+                        <div>Average Time</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="best-time">--</span>
+                        <div>Best Time</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speed Challenge -->
+    <section class="challenge-section">
+        <div class="container">
+            <h2>🏆 Speed Challenge</h2>
+            <p>How fast can you switch between all 4 cores? Challenge yourself!</p>
+            
+            <div class="challenge-timer" id="challenge-timer">Ready?</div>
+            <button class="challenge-btn" onclick="startChallenge()">Start Challenge</button>
+            
+            <div id="challenge-progress" style="margin-top: 2rem; display: none;">
+                <p>Switch to: <strong id="target-core">Casual</strong></p>
+                <div style="background: var(--border); height: 10px; border-radius: 5px; margin: 1rem 0;">
+                    <div id="progress-bar" style="background: var(--accent); height: 100%; width: 0%; border-radius: 5px; transition: width 0.3s;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let switchCount = 0;
+        let totalTime = 0;
+        let bestTime = null;
+        let startTime = null;
+        let challengeActive = false;
+        let challengeStep = 0;
+        let challengeStartTime = null;
+        const challengeSequence = ['casual', 'running', 'cleat', 'roller'];
+        
+        function switchCore(coreType, imageUrl) {
+            if (challengeActive) {
+                handleChallengeSwitch(coreType);
+            }
+            
+            const shoeCore = document.getElementById('shoe-core');
+            const timer = document.getElementById('timer');
+            
+            // Start timing
+            const switchStart = Date.now();
+            startTime = switchStart;
+            
+            // Update timer display
+            const timerInterval = setInterval(() => {
+                const elapsed = (Date.now() - switchStart) / 1000;
+                timer.textContent = elapsed.toFixed(2) + 's';
+            }, 10);
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.core-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            event.target.closest('.core-btn').classList.add('active');
+            
+            // Animate shoe transformation
+            shoeCore.style.opacity = '0';
+            shoeCore.style.transform = 'scale(0.8) rotateY(180deg)';
+            
+            setTimeout(() => {
+                shoeCore.style.backgroundImage = `url('${imageUrl}')`;
+                shoeCore.style.backgroundSize = 'contain';
+                shoeCore.style.backgroundRepeat = 'no-repeat';
+                shoeCore.style.backgroundPosition = 'center';
+                shoeCore.classList.add('active');
+                
+                // Complete transformation
+                setTimeout(() => {
+                    clearInterval(timerInterval);
+                    const finalTime = (Date.now() - switchStart) / 1000;
+                    timer.textContent = finalTime.toFixed(2) + 's';
+                    
+                    // Update statistics
+                    switchCount++;
+                    totalTime += finalTime;
+                    
+                    if (bestTime === null || finalTime < bestTime) {
+                        bestTime = finalTime;
+                    }
+                    
+                    updateStats();
+                }, 600);
+            }, 300);
+        }
+        
+        function updateStats() {
+            document.getElementById('switch-count').textContent = switchCount;
+            document.getElementById('avg-time').textContent = (totalTime / switchCount).toFixed(1) + 's';
+            document.getElementById('best-time').textContent = bestTime ? bestTime.toFixed(2) + 's' : '--';
+        }
+        
+        function startChallenge() {
+            challengeActive = true;
+            challengeStep = 0;
+            challengeStartTime = Date.now();
+            
+            document.getElementById('challenge-timer').textContent = '0.00s';
+            document.getElementById('challenge-progress').style.display = 'block';
+            document.getElementById('target-core').textContent = challengeSequence[0];
+            document.getElementById('progress-bar').style.width = '0%';
+            
+            const challengeTimer = setInterval(() => {
+                const elapsed = (Date.now() - challengeStartTime) / 1000;
+                document.getElementById('challenge-timer').textContent = elapsed.toFixed(2) + 's';
+            }, 10);
+            
+            window.challengeTimer = challengeTimer;
+        }
+        
+        function handleChallengeSwitch(coreType) {
+            if (coreType === challengeSequence[challengeStep]) {
+                challengeStep++;
+                const progress = (challengeStep / challengeSequence.length) * 100;
+                document.getElementById('progress-bar').style.width = progress + '%';
+                
+                if (challengeStep < challengeSequence.length) {
+                    document.getElementById('target-core').textContent = challengeSequence[challengeStep];
+                } else {
+                    // Challenge complete!
+                    clearInterval(window.challengeTimer);
+                    const finalTime = (Date.now() - challengeStartTime) / 1000;
+                    document.getElementById('challenge-timer').textContent = finalTime.toFixed(2) + 's - Complete! 🎉';
+                    challengeActive = false;
+                    document.getElementById('challenge-progress').style.display = 'none';
+                }
+            }
+        }
+        
+        // Initialize with casual core
+        document.addEventListener('DOMContentLoaded', () => {
+            switchCore('casual', 'https://i.imgur.com/MfhviPW.png');
+        });
+    </script>
+</body>
+</html>
