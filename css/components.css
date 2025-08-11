@@ -408,6 +408,136 @@
   color: var(--text-dark);
 }
 
+/* Dark Mode Chatbot Fix - Add to your CSS */
+
+/* Ensure chatbot has proper z-index and visibility in dark mode */
+.chatbot-container {
+    position: fixed;
+    bottom: 5rem;
+    right: 2rem;
+    width: 380px;
+    height: 600px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    z-index: 1000; /* Increased z-index */
+    transition: all var(--transition-normal);
+    transform: translateY(100vh);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.chatbot-container.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.chatbot-toggle {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1001; /* Ensure toggle is always visible */
+    transition: all var(--transition-normal);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chatbot-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Dark mode specific fixes */
+[data-theme="dark"] .chatbot-container {
+    background: var(--background-secondary, #1a1a2e);
+    border-color: var(--border, rgba(255, 255, 255, 0.1));
+    color: var(--text-primary, #ffffff);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .chatbot-header {
+    background: var(--surface, #16213e);
+    border-bottom-color: var(--border, rgba(255, 255, 255, 0.1));
+    color: var(--text-primary, #ffffff);
+}
+
+[data-theme="dark"] .chatbot-body {
+    background: var(--background-secondary, #1a1a2e);
+}
+
+[data-theme="dark"] .chatbot-message {
+    color: var(--text-primary, #ffffff);
+}
+
+[data-theme="dark"] .chatbot-message.bot {
+    background: var(--surface, #16213e);
+}
+
+[data-theme="dark"] .chatbot-message.user {
+    background: var(--primary, #667eea);
+    color: white;
+}
+
+[data-theme="dark"] .chatbot-input {
+    background: var(--surface, #16213e);
+    border-top-color: var(--border, rgba(255, 255, 255, 0.1));
+}
+
+[data-theme="dark"] .chatbot-input input {
+    background: var(--background-secondary, #1a1a2e);
+    border-color: var(--border, rgba(255, 255, 255, 0.1));
+    color: var(--text-primary, #ffffff);
+}
+
+[data-theme="dark"] .chatbot-input input::placeholder {
+    color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+}
+
+[data-theme="dark"] .chatbot-input button {
+    background: var(--primary, #667eea);
+    color: white;
+}
+
+/* Force visibility for chatbot toggle in all themes */
+.chatbot-toggle {
+    background: #667eea !important;
+    color: white !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+    .chatbot-container {
+        width: calc(100vw - 2rem);
+        max-width: 350px;
+        height: 480px;
+        right: 1rem;
+        bottom: 5rem;
+    }
+    
+    .chatbot-toggle {
+        bottom: 1rem;
+        right: 1rem;
+        width: 56px;
+        height: 56px;
+        font-size: 1.3rem;
+    }
+}
+
 /* Cart Sidebar */
 .cart-sidebar {
   position: fixed;
