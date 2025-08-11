@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products - FlexCore</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .products-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 8rem 0 4rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .products-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .products-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .products-main {
+            padding: 6rem 0;
+        }
+        
+        .products-expanded-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .breadcrumb {
+            padding: 2rem 0 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .product-category-section {
+            margin-bottom: 4rem;
+        }
+        
+        .category-title {
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+        }
+        
+        .category-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <img src="https://i.imgur.com/rQJ8wvO.png" alt="FlexCore">
+            </div>
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Loading Products...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <img src="https://i.imgur.com/rQJ8wvO.png" alt="FlexCore Logo" class="nav-logo">
+                    <span class="nav-title">FlexCore</span>
+                </div>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="#" class="nav-link active">Products</a>
+                    <a href="index.html#features" class="nav-link">Features</a>
+                    <a href="index.html#support" class="nav-link">Support</a>
+                </div>
+                
+                <div class="nav-actions">
+                    <button class="cart-btn" onclick="toggleCart()">
+                        🛒 <span class="cart-badge">0</span>
+                    </button>
+                    <button class="nav-toggle" id="nav-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Products Hero -->
+    <section class="products-hero">
+        <div class="container">
+            <h1>All Products</h1>
+            <p>Discover our complete collection of FlexCore shoes and accessories. From foundation shoes to specialized cores, find everything you need for the perfect fit.</p>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> > <span>All Products</span>
+        </div>
+    </div>
+
+    <!-- Products Main -->
+    <section class="products-main">
+        <div class="container">
+            
+            <!-- Foundation Shoes Category -->
+            <div class="product-category-section">
+                <h2 class="category-title">Foundation Shoes</h2>
+                <p class="category-description">The base of your FlexCore system. These shoes provide the foundation for all your core attachments.</p>
+                
+                <div class="products-expanded-grid">
+                    <div class="product-card" data-category="foundation">
+                        <div class="product-image">
+                            <img src="https://i.imgur.com/GuSEaVq.png" alt="Basic Bare">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Basic Bare</h3>
+                            <p class="product-description">The foundation of your FlexCore system with premium comfort.</p>
+                            <div class="product-price">
+                                <span class="price-current">$59.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary btn-product" onclick="viewProduct('basic-bare')">View Details</button>
+                                <button class="btn btn-primary btn-product" onclick="addToCart('basic-bare')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="foundation">
+                        <div class="product-image">
+                            <img src="https://i.imgur.com/GuSEaVq.png" alt="Basic Bare Pro">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Basic Bare Pro</h3>
+                            <p class="product-description">Enhanced version with premium leather and advanced cushioning.</p>
+                            <div class="product-price">
+                                <span class="price-current">$79.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary btn-product" onclick="viewProduct('basic-bare-pro')">View Details</button>
+                                <button class="btn btn-primary btn-product" onclick="addToCart('basic-bare-pro')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="foundation">
+                        <div class="product-image">
+                            <img src="https://i.imgur.com/GuSEaVq.png" alt="Basic Bare Elite">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Basic Bare Elite</h3>
+                            <p class="product-description">Top-tier foundation with carbon fiber reinforcement.</p>
+                            <div class="product-price">
+                                <span class="price-current">$99.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary btn-product" onclick="viewProduct('basic-bare-elite')">View Details</button>
+                                <button class="btn btn-primary btn-product" onclick="addToCart('basic-bare-elite')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity Cores Category -->
+            <div class="product-category-section">
+                <h2 class="category-title">Activity Cores</h2>
+                <p class="category-description">Specialized cores designed for specific activities and sports.</p>
+                
+                <div class="products-expanded-grid">
+                    <div class="product-card" data-category="cores">
+                        <div class="product-image">
+                            <img src="https://i.imgur.com/MfhviPW.png" alt="Casual Cores">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Casual Cores</h3>
+                            <p class="product-description">Perfect for everyday wear and casual activities.</p>
+                            <div class="product-price">
+                                <span class="price-current">$19.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary btn-product" onclick="viewProduct('casual-cores')">View Details</button>
+                                <button class="btn btn-primary btn-product" onclick="addToCart('casual-cores')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="cores">
+                        <div class="product-image">
+                            <img src="https://i.imgur.com/kyuImHk.png" alt="Running Cores">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Performance Running Cores</h3>
+                            <p class="product-description">Lightweight cores optimized for running and cardio.</p>
+                            <div class="product-price">
+                                <span class="price-current">$19.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary btn-product" onclick="viewProduct('running-cores')">View Details</button>
+                                <button class="btn btn-primary btn-product" onclick="addToCart('running-cores')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="cores">
+                        <div class="product-image">
+                            <img src="http://i.imgur.com/KmfodAU.png" alt="Cleat Cores">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Professional Cleat Cores</h3>
+                            <p class="product-description">High-performance cores for professional sports.</p>
+                            <div class="product-price">
+                                <span class="price-current">$19.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary btn-product" onclick="viewProduct('cleat-cores')">View Details</button>
+                                <button class="btn btn-primary btn-product" onclick="addToCart('cleat-cores')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="cores">
+                        <div class="product-image">
+                            <img src="https://i.imgur.com/MuvrLOV.png" alt="Roller Cores">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Roller Cores</h3>
+                            <p class="product-description">Transform your shoes into roller skates instantly.</p>
+                            <div class="product-price">
+                                <span class="price-current">$19.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary btn-product" onclick="viewProduct('roller-cores')">View Details</button>
+                                <button class="btn btn-primary btn-product" onclick="addToCart('roller-cores')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="cores">
+                        <div class="product-image">
+                            <img src="https://i.imgur.com/kyuImHk.png" alt="Basketball Cores">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Basketball Cores</h3>
+                            <p class="product-description">High-top cores with ankle support for basketball.</p>
+                            <div class="product-price">
+                                <span class="price-current">$24.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary btn-product" onclick="viewProduct('basketball-cores')">View Details</button>
+                                <button class="btn btn-primary btn-product" onclick="addToCart('basketball-cores')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="cores">
+                        <div class="product-image">
+                            <img src="https://i.imgur.com/MfhviPW.png" alt="Hiking Cores">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">All-Terrain Hiking Cores</h3>
+                            <p class="product-description">Rugged cores with superior grip for outdoor adventures.</p>
+                            <div class="product-price">
+                                <span class="price-current">$29.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary btn-product" onclick="viewProduct('hiking-cores')">View Details</button>
+                                <button class="btn btn-primary btn-product" onclick="addToCart('hiking-cores')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bundles & Kits Category -->
+            <div class="product-category-section">
+                <h2 class="category-title">Bundles & Starter Kits</h2>
+                <p class="category-description">Complete sets and bundles for the best value and convenience.</p>
+                
+                <div class="products-expanded-grid">
+                    <div class="product-card" data-category="bundles">
+                        <div class="product-image">
+                            <img src="https://i.imgur.com/myAyR8N.png" alt="Starter Kit">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Complete Starter Kit</h3>
+                            <p class="product-description">Everything you need to get started with FlexCore.</p>
+                            <div class="product-price">
+                                <span class="price-current">$94.99</span>
+                                <span class="price-original">$109.97</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary btn-product" onclick="viewProduct('starter-kit')">View Details</button>
+                                <button class="btn btn-primary btn-product" onclick="addToCart('starter-kit')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="bundles">
+                        <div class="product-image">
+                            <img src="https://i.imgur.com/myAyR8N.png" alt="Sports Bundle">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Ultimate Sports Bundle</h3>
+                            <p class="product-description">Basic Bare + 5 sports cores for the active lifestyle.</p>
+                            <div class="product-price">
+                                <span class="price-current">$139.99</span>
+                                <span class="price-original">$159.94</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary btn-product" onclick="viewProduct('sports-bundle')">View Details</button>
+                                <button class="btn btn-primary btn-product" onclick="addToCart('sports-bundle')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="bundles">
+                        <div class="product-image">
+                            <img src="https://i.imgur.com/myAyR8N.png" alt="Family Pack">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Family Pack</h3>
+                            <p class="product-description">2 Basic Bare shoes + 4 core sets for the whole family.</p>
+                            <div class="product-price">
+                                <span class="price-current">$199.99</span>
+                                <span class="price-original">$239.92</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary btn-product" onclick="viewProduct('family-pack')">View Details</button>
+                                <button class="btn btn-primary btn-product" onclick="addToCart('family-pack')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accessories Category -->
+            <div class="product-category-section">
+                <h2 class="category-title">Accessories</h2>
+                <p class="category-description">Essential accessories to enhance your FlexCore experience.</p>
+                
+                <div class="products-expanded-grid">
+                    <div class="product-card" data-category="accessories">
+                        <div class="product-image">
+                            <img src="https://i.imgur.com/rQJ8wvO.png" alt="Carrying Case">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Premium Carrying Case</h3>
+                            <p class="product-description">Organize and transport your cores in style.</p>
+                            <div class="product-price">
+                                <span class="price-current">$24.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary btn-product" onclick="viewProduct('carrying-case')">View Details</button>
+                                <button class="btn btn-primary btn-product" onclick="addToCart('carrying-case')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="accessories">
+                        <div class="product-image">
+                            <img src="https://i.imgur.com/rQJ8wvO.png" alt="Cleaning Kit">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Care & Cleaning Kit</h3>
+                            <p class="product-description">Keep your FlexCore system in perfect condition.</p>
+                            <div class="product-price">
+                                <span class="price-current">$14.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary btn-product" onclick="viewProduct('cleaning-kit')">View Details</button>
+                                <button class="btn btn-primary btn-product" onclick="addToCart('cleaning-kit')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="accessories">
+                        <div class="product-image">
+                            <img src="https://i.imgur.com/rQJ8wvO.png" alt="Replacement Parts">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Replacement Parts Kit</h3>
+                            <p class="product-description">Essential replacement parts and fasteners.</p>
+                            <div class="product-price">
+                                <span class="price-current">$9.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary btn-product" onclick="viewProduct('replacement-parts')">View Details</button>
+                                <button class="btn btn-primary btn-product" onclick="addToCart('replacement-parts')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-close" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-body">
+            <div class="cart-items" id="cart-items"></div>
+        </div>
+        <div class="cart-footer" id="cart-footer">
+            <div class="cart-summary">
+                <div class="cart-subtotal">
+                    Subtotal: $<span id="cart-subtotal">0.00</span>
+                </div>
+                <div class="cart-total">
+                    Total: $<span id="cart-total">0.00</span>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-large cart-checkout" onclick="proceedToCheckout()">
+                Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal-overlay" id="modal-overlay" onclick="closeProductModal()"></div>
+    <div class="product-modal" id="product-modal">
+        <div class="modal-header">
+            <h3 id="modal-title"></h3>
+            <button class="modal-close" onclick="closeProductModal()">✕</button>
+        </div>
+        <div class="modal-body" id="modal-body"></div>
+    </div>
+
+    <!-- Back to Top -->
+    <button id="back-to-top" class="back-to-top" onclick="smoothScrollTo('body')">
+        ↑
+    </button>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-header">
+            <h4>FlexCore Assistant</h4>
+            <button class="chatbot-minimize" onclick="toggleChatbot()">−</button>
+        </div>
+        <div class="chatbot-body" id="chatbot-body">
+            <div class="chatbot-message bot">
+                <p>Hi! I'm here to help you find the perfect FlexCore products. What are you looking for today?</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your message..." id="chatbot-input">
+            <button onclick="sendChatMessage()">Send</button>
+        </div>
+    </div>
+    
+    <button class="chatbot-toggle" id="chatbot-toggle" onclick="toggleChatbot()">
+        💬
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
