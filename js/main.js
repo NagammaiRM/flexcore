@@ -222,6 +222,113 @@ function setupAnimations() {
     });
 }
 
+// Updated Shopping Cart and Product Functions
+
+function addToCart(productId) {
+    const products = {
+        'basic-bare': { id: 'basic-bare', name: 'Basic Bare', price: 59.99, image: 'https://i.imgur.com/GuSEaVq.png' }, // Updated price
+        'starter-kit': { id: 'starter-kit', name: 'Complete Starter Kit', price: 94.99, image: 'https://i.imgur.com/myAyR8N.png' },
+        'casual-cores': { id: 'casual-cores', name: 'Casual Cores', price: 19.99, image: 'https://i.imgur.com/MfhviPW.png' },
+        'cleat-cores': { id: 'cleat-cores', name: 'Professional Cleat Cores', price: 19.99, image: 'http://i.imgur.com/KmfodAU.png' },
+        'roller-cores': { id: 'roller-cores', name: 'Roller Cores', price: 19.99, image: 'https://i.imgur.com/MuvrLOV.png' },
+        'running-cores': { id: 'running-cores', name: 'Performance Running Cores', price: 19.99, image: 'https://i.imgur.com/kyuImHk.png' }
+    };
+    
+    const product = products[productId];
+    if (!product) return;
+    
+    const existingItem = cart.find(item => item.id === productId);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ ...product, quantity: 1 });
+    }
+    
+    updateCartUI();
+    showCartNotification(product.name);
+    
+    // Track add to cart
+    trackEvent('Ecommerce', 'add_to_cart', productId);
+}
+
+// Updated Product Modal with new price
+function viewProduct(productId) {
+    const products = {
+        'basic-bare': {
+            name: 'Basic Bare',
+            price: 59.99, // Updated price
+            image: 'https://i.imgur.com/GuSEaVq.png',
+            description: 'The foundation of your FlexCore system. This minimalist base shoe is crafted with premium materials and designed for maximum comfort. Available in both lace-up and slip-on styles.',
+            features: ['Premium synthetic upper', 'Cushioned insole', 'Flexible construction', 'Available in 6 colors', 'Lace-up or slip-on options']
+        },
+        'starter-kit': {
+            name: 'Complete Starter Kit',
+            price: 94.99,
+            originalPrice: 109.97,
+            image: 'https://i.imgur.com/myAyR8N.png',
+            description: 'Perfect for newcomers to the FlexCore ecosystem! This comprehensive kit includes our Basic Bare foundation plus your choice of any 2 cores from our collection.',
+            features: ['1x Basic Bare shoe', 'Your choice of 2 cores', 'Carrying case included', 'Setup guide', 'Best value option']
+        }
+        // Add more products as needed
+    };
+    
+    const product = products[productId];
+    if (!product) return;
+    
+    const modal = document.getElementById('product-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+    const modalOverlay = document.getElementById('modal-overlay');
+    
+    if (modal && modalTitle && modalBody) {
+        modalTitle.textContent = product.name;
+        modalBody.innerHTML = `
+            <div class="modal-product">
+                <div class="modal-image">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+                <div class="modal-info">
+                    <div class="modal-price">
+                        <span class="price-current">$${product.price.toFixed(2)}</span>
+                        ${product.originalPrice ? `<span class="price-original">$${product.originalPrice.toFixed(2)}</span>` : ''}
+                    </div>
+                    <p class="modal-description">${product.description}</p>
+                    <div class="modal-features">
+                        <h4>Key Features:</h4>
+                        <ul>
+                            ${product.features.map(feature => `<li>${feature}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn btn-primary btn-large" onclick="addToCart('${productId}'); closeProductModal();">
+                            Add to Cart - $${product.price.toFixed(2)}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        modal.style.display = 'block';
+        modalOverlay.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        // Track product view
+        trackEvent('Products', 'view_details', productId);
+    }
+}
+
+// New function to navigate to products page
+function viewAllProducts() {
+    // Track the click
+    trackEvent('Navigation', 'view_all_products', 'hero_cta');
+    
+    // Navigate to products page
+    window.location.href = 'products.html';
+}
+
+// Export the new function
+window.viewAllProducts = viewAllProducts;
+
 // Product Filters
 function setupProductFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');
