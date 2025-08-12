@@ -20,15 +20,21 @@ let currentShoeCount = 8;
 let currentCoreCount = 8;
 let currentRoom = 'small';
 
-// DOM Elements
-const navbar = document.getElementById('navbar');
-const navToggle = document.getElementById('nav-toggle');
-const navMenu = document.getElementById('nav-menu');
-const loadingScreen = document.getElementById('loading-screen');
-const backToTopBtn = document.getElementById('back-to-top');
+// DOM Elements (declare first)
+let navbar;
+let navToggle;
+let navMenu;
+let loadingScreen;
+let backToTopBtn;
 
-// Initialize the application
+// Initialize the application once DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
+    navbar = document.getElementById('navbar');
+    navToggle = document.getElementById('nav-toggle');
+    navMenu = document.getElementById('nav-menu');
+    loadingScreen = document.getElementById('loading-screen');
+    backToTopBtn = document.getElementById('back-to-top');
+
     initializeApp();
 });
 
@@ -43,6 +49,7 @@ function initializeApp() {
     setupForms();
     setupCart();
     setupBackToTop();
+}
     
     // Globe initialization with error handling
     try {
