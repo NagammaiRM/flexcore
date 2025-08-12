@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space-Saving Organizer - FlexCore</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .space-hero {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 8rem 0 4rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .organizer-section {
+            padding: 6rem 0;
+        }
+        
+        .closet-simulator {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .closet-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin: 3rem 0;
+        }
+        
+        .closet-side {
+            background: var(--surface);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            min-height: 500px;
+        }
+        
+        .closet-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+        
+        .shoe-rack {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .shoe-slot {
+            aspect-ratio: 1;
+            background: var(--background);
+            border: 2px dashed var(--border);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: all var(--transition-normal);
+            cursor: pointer;
+        }
+        
+        .shoe-slot.filled {
+            border-color: var(--primary);
+            border-style: solid;
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .shoe-slot.filled:hover {
+            transform: scale(0.95);
+        }
+        
+        .core-organizer {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .core-slot {
+            aspect-ratio: 1;
+            background: var(--primary);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+        
+        .core-slot:hover {
+            transform: scale(1.05);
+        }
+        
+        .space-stats {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+        
+        .controls {
+            margin: 2rem 0;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .room-type-selector {
+            margin: 2rem 0;
+        }
+        
+        .room-btn {
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+        
+        .room-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .organization-tips {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            margin: 3rem 0;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .tip-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        @media (max-width: 768px) {
+            .closet-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .shoe-rack {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .core-organizer {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <img src="https://i.imgur.com/rQJ8wvO.png" alt="FlexCore Logo" class="nav-logo">
+                    <span class="nav-title">FlexCore</span>
+                </div>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="products.html" class="nav-link">Products</a>
+                    <a href="index.html#features" class="nav-link">Features</a>
+                    <a href="index.html#support" class="nav-link">Support</a>
+                </div>
+                
+                <div class="nav-actions">
+                    <button class="cart-btn" onclick="toggleCart()">
+                        🛒 <span class="cart-badge">0</span>
+                    </button>
+                    <button class="nav-toggle" id="nav-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Space Hero -->
+    <section class="space-hero">
+        <div class="container">
+            <h1>🏠 Space-Saving Organizer</h1>
+            <p>See how FlexCore can transform your closet space and help you organize more efficiently</p>
+        </div>
+    </section>
+
+    <!-- Organizer Section -->
+    <section class="organizer-section">
+        <div class="container">
+            <div class="closet-simulator">
+                <h2>Interactive Closet Comparison</h2>
+                <p>Compare traditional shoe storage with FlexCore's space-saving solution</p>
+                
+                <div class="room-type-selector">
+                    <button class="room-btn active" onclick="selectRoom('small')">Small Apartment</button>
+                    <button class="room-btn" onclick="selectRoom('medium')">Medium Home</button>
+                    <button class="room-btn" onclick="selectRoom('large')">Large House</button>
+                </div>
+                
+                <div class="closet-container">
+                    <!-- Traditional Closet -->
+                    <div class="closet-side">
+                        <h3 class="closet-title">🥿 Traditional Shoe Collection</h3>
+                        <div class="shoe-rack" id="traditional-rack">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                        <div id="traditional-stats">
+                            <p><strong id="trad-pairs">8</strong> pairs of shoes</p>
+                            <p><strong id="trad-space">24</strong> sq ft of closet space</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FlexCore Closet -->
+                    <div class="closet-side">
+                        <h3 class="closet-title">⚡ FlexCore System</h3>
+                        <div style="margin: 1rem 0;">
+                            <div class="shoe-slot filled" onclick="showShoeDetails()">
+                                👟<br><small>Base Shoe</small>
+                            </div>
+                        </div>
+                        <h4>Cores Collection</h4>
+                        <div class="core-organizer" id="core-organizer">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                        <div id="flexcore-stats">
+                            <p><strong>1</strong> base shoe + <strong id="core-count">8</strong> cores</p>
+                            <p><strong id="flex-space">3</strong> sq ft of closet space</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <button class="control-btn" onclick="addShoes()">Add More Shoes</button>
+                    <button class="control-btn" onclick="removeShoes()">Remove Shoes</button>
+                    <button class="control-btn" onclick="reorganize()">Reorganize</button>
+                    <button class="control-btn" onclick="resetCloset()">Reset</button>
+                </div>
+                
+                <div class="space-stats">
+                    <h3>Space Savings Summary</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number" id="space-saved">87%</span>
+                            <div>Space Saved</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="storage-efficiency">8x</span>
+                            <div>Storage Efficiency</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="organization-score">95</span>
+                            <div>Organization Score</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="organization-tips">
+                    <h3>💡 Smart Organization Tips</h3>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <h4>🎯 Core Categories</h4>
+                            <p>Group your cores by activity: sports, casual, formal, and seasonal for easy access.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🏷️ Color Coding</h4>
+                            <p>Use colored labels or containers to quickly identify different core types.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>📦 Compact Storage</h4>
+                            <p>Store cores in our premium carrying case to maximize space and protect your investment.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🔄 Rotation System</h4>
+                            <p>Keep frequently used cores easily accessible and rotate seasonal options.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let currentShoeCount = 8;
+        let currentCoreCount = 8;
+        let currentRoom = 'small';
+        
+        const roomSpecs = {
+            small: { multiplier: 1, maxShoes: 12 },
+            medium: { multiplier: 1.5, maxShoes: 20 },
+            large: { multiplier: 2, maxShoes: 30 }
+        };
+        
+        const shoeIcons = ['👟', '👠', '🥿', '👢', '🦶', '🩴', '🥾', '👡', '🩰', '⛷️'];
+        const coreTypes = ['Casual', 'Run', 'Sport', 'Formal', 'Boot', 'Summer', 'Hike', 'Dance'];
+        
+        function selectRoom(roomType) {
+            currentRoom = roomType;
+            document.querySelectorAll('.room-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            updateDisplay();
+        }
+        
+        function updateDisplay() {
+            const spec = roomSpecs[currentRoom];
+            
+            // Update traditional shoe rack
+            const traditionalRack = document.getElementById('traditional-rack');
+            traditionalRack.innerHTML = '';
+            
+            for (let i = 0; i < currentShoeCount; i++) {
+                const slot = document.createElement('div');
+                slot.className = 'shoe-slot filled';
+                slot.innerHTML = shoeIcons[i % shoeIcons.length];
+                slot.onclick = () => removeSpecificShoe(i);
+                traditionalRack.appendChild(slot);
+            }
+            
+            // Add empty slots
+            const maxSlots = Math.ceil(currentShoeCount / 3) * 3;
+            for (let i = currentShoeCount; i < maxSlots; i++) {
+                const slot = document.createElement('div');
+                slot.className = 'shoe-slot';
+                slot.innerHTML = '+';
+                slot.onclick = addShoes;
+                traditionalRack.appendChild(slot);
+            }
+            
+            // Update core organizer
+            const coreOrganizer = document.getElementById('core-organizer');
+            coreOrganizer.innerHTML = '';
+            
+            for (let i = 0; i < currentCoreCount; i++) {
+                const core = document.createElement('div');
+                core.className = 'core-slot';
+                core.textContent = coreTypes[i % coreTypes.length];
+                core.onclick = () => showCoreDetails(coreTypes[i % coreTypes.length]);
+                coreOrganizer.appendChild(core);
+            }
+            
+            // Update stats
+            const tradSpace = currentShoeCount * 3 * spec.multiplier;
+            const flexSpace = 3 * spec.multiplier; // Base shoe + cores storage
+            const spaceSaved = Math.round(((tradSpace - flexSpace) / tradSpace) * 100);
+            
+            document.getElementById('trad-pairs').textContent = currentShoeCount;
+            document.getElementById('trad-space').textContent = Math.round(tradSpace);
+            document.getElementById('core-count').textContent = currentCoreCount;
+            document.getElementById('flex-space').textContent = Math.round(flexSpace);
+            document.getElementById('space-saved').textContent = spaceSaved + '%';
+            document.getElementById('storage-efficiency').textContent = Math.round(tradSpace / flexSpace) + 'x';
+            document.getElementById('organization-score').textContent = Math.min(100, 70 + spaceSaved/3);
+        }
+        
+        function addShoes() {
+            const maxShoes = roomSpecs[currentRoom].maxShoes;
+            if (currentShoeCount < maxShoes) {
+                currentShoeCount++;
+                currentCoreCount = Math.min(currentCoreCount + 1, 10);
+                updateDisplay();
+            } else {
+                alert(`Maximum ${maxShoes} shoes for ${currentRoom} space!`);
+            }
+        }
+        
+        function removeShoes() {
+            if (currentShoeCount > 3) {
+                currentShoeCount--;
+                currentCoreCount = Math.max(currentCoreCount - 1, 3);
+                updateDisplay();
+            }
+        }
+        
+        function removeSpecificShoe(index) {
+            if (currentShoeCount > 3) {
+                currentShoeCount--;
+                currentCoreCount = Math.max(currentCoreCount - 1, 3);
+                updateDisplay();
+            }
+        }
+        
+        function reorganize() {
+            // Animate reorganization
+            const slots = document.querySelectorAll('.shoe-slot.filled');
+            slots.forEach((slot, index) => {
+                setTimeout(() => {
+                    slot.style.transform = 'scale(0.8) rotate(360deg)';
+                    setTimeout(() => {
+                        slot.style.transform = 'scale(1) rotate(0deg)';
+                    }, 300);
+                }, index * 100);
+            });
+            
+            const cores = document.querySelectorAll('.core-slot');
+            cores.forEach((core, index) => {
+                setTimeout(() => {
+                    core.style.transform = 'scale(1.2) rotate(-360deg)';
+                    setTimeout(() => {
+                        core.style.transform = 'scale(1) rotate(0deg)';
+                    }, 300);
+                }, index * 50);
+            });
+        }
+        
+        function resetCloset() {
+            currentShoeCount = 8;
+            currentCoreCount = 8;
+            updateDisplay();
+        }
+        
+        function showShoeDetails() {
+            alert('💡 FlexCore Base Shoe\n\n✅ Premium comfort\n✅ Universal fit system\n✅ Durable construction\n✅ Compatible with all cores');
+        }
+        
+        function showCoreDetails(coreType) {
+            const details = {
+                'Casual': 'Perfect for everyday wear and social activities',
+                'Run': 'Lightweight design for running and cardio',
+                'Sport': 'Professional-grade for competitive sports',
+                'Formal': 'Elegant style for business and formal events',
+                'Boot': 'Weather-resistant for outdoor conditions',
+                'Summer': 'Breathable design for hot weather',
+                'Hike': 'Rugged grip for outdoor adventures',
+                'Dance': 'Flexible sole for dancing and performance'
+            };
+            
+            alert(`🔧 ${coreType} Core\n\n${details[coreType] || 'Specialized core for specific activities'}\n\n💡 Attaches in seconds!`);
+        }
+        
+        // Initialize display
+        document.addEventListener('DOMContentLoaded', updateDisplay);
+    </script>
+</body>
+</html>
