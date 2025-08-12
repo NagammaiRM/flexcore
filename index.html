@@ -18,23 +18,1789 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/responsive.css">
-  
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="FlexCore - Transform Every Step">
-  <meta property="og:description" content="Revolutionary modular footwear system with interchangeable cores">
-  <meta property="og:image" content="https://i.imgur.com/vjMQVmY.png">
-  <meta property="og:url" content="https://flexcore.com">
-  <meta property="og:type" content="website">
-  
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="FlexCore - Transform Every Step">
-  <meta name="twitter:description" content="Revolutionary modular footwear system with interchangeable cores">
-  <meta name="twitter:image" content="https://i.imgur.com/vjMQVmY.png">
+  <style>
+    :root {
+      --primary-color: #667eea;
+      --secondary-color: #764ba2;
+      --accent-color: #f093fb;
+      --text-dark: #2d3748;
+      --text-light: #718096;
+      --bg-white: #ffffff;
+      --bg-light: #f7fafc;
+      --border-color: #e2e8f0;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      --gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      --border-radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .dark-mode {
+      --text-dark: #e2e8f0;
+      --text-light: #a0aec0;
+      --bg-white: #1a202c;
+      --bg-light: #2d3748;
+      --border-color: #4a5568;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background: var(--bg-light);
+      transition: var(--transition);
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Loading Screen */
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loader {
+      text-align: center;
+    }
+
+    .loader-text {
+      font-size: 2rem;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 2rem;
+      animation: pulse 2s infinite;
+    }
+
+    .loader-bar {
+      width: 200px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .loader-bar::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: white;
+      transform: translateX(-100%);
+      animation: load 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    @keyframes load {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .dark-mode .navbar {
+      background: rgba(26, 32, 44, 0.95);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    .nav-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--primary-color);
+      background: rgba(102, 126, 234, 0.1);
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--text-dark);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--gradient);
+      color: white;
+      overflow: hidden;
+    }
+
+    .hero-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.1;
+      background-image: radial-gradient(circle at 25% 25%, white 2px, transparent 2px);
+      background-size: 50px 50px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 900;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .gradient-text {
+      background: linear-gradient(45deg, #f093fb, #f5f7fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+      opacity: 0.8;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: white;
+      color: var(--primary-color);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      color: var(--primary-color);
+    }
+
+    .btn-large {
+      padding: 1.25rem 2.5rem;
+      font-size: 1.1rem;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: var(--transition);
+    }
+
+    .scroll-indicator:hover {
+      opacity: 1;
+    }
+
+    .scroll-mouse {
+      width: 30px;
+      height: 50px;
+      border: 2px solid white;
+      border-radius: 15px;
+      margin: 0 auto 1rem;
+      position: relative;
+    }
+
+    .scroll-wheel {
+      width: 4px;
+      height: 10px;
+      background: white;
+      border-radius: 2px;
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: scroll 2s infinite;
+    }
+
+    @keyframes scroll {
+      0% { opacity: 1; top: 8px; }
+      100% { opacity: 0; top: 25px; }
+    }
+
+    .scroll-text {
+      font-size: 0.9rem;
+      color: white;
+    }
+
+    /* Products Section */
+    .products-section {
+      padding: 5rem 0;
+      background: var(--bg-white);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .products-filter {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      border: 2px solid var(--border-color);
+      border-radius: var(--border-radius);
+      color: var(--text-light);
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+      color: white;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .product-card {
+      background: var(--bg-white);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-card.featured {
+      border: 2px solid var(--primary-color);
+    }
+
+    .product-ribbon {
+      position: absolute;
+      top: 1rem;
+      right: -30px;
+      background: var(--accent-color);
+      color: white;
+      padding: 0.5rem 2rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transform: rotate(45deg);
+      z-index: 2;
+    }
+
+    .product-image-container {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .product-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .product-card:hover .product-overlay {
+      opacity: 1;
+    }
+
+    .overlay-btn {
+      background: white;
+      color: var(--text-dark);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .overlay-btn:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .product-info {
+      padding: 1.5rem;
+    }
+
+    .product-badge {
+      display: inline-block;
+      background: var(--primary-color);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .product-badge.kit {
+      background: var(--accent-color);
+    }
+
+    .product-badge.core {
+      background: var(--secondary-color);
+    }
+
+    .product-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    .product-description {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .stars {
+      color: #ffd700;
+      font-size: 1.1rem;
+    }
+
+    .rating-text {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .product-price {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .price-current {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .price-original {
+      text-decoration: line-through;
+      color: var(--text-light);
+    }
+
+    .price-save {
+      background: #e6fffa;
+      color: #00a085;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .btn-product {
+      width: 100%;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    /* Features Section */
+    .features-section {
+      padding: 5rem 0;
+      background: var(--bg-light);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--bg-white);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      color: inherit;
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+
+    .feature-description {
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Testimonials Section */
+    .testimonials-section {
+      padding: 5rem 0;
+      background: var(--bg-white);
+    }
+
+    .testimonials-slider {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+    }
+
+    .testimonial-card {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: var(--transition);
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    .testimonial-card.active {
+      opacity: 1;
+      transform: translateX(0);
+      position: relative;
+    }
+
+    .testimonial-content {
+      background: var(--bg-light);
+      padding: 3rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+    }
+
+    .testimonial-stars {
+      color: #ffd700;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-text {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      color: var(--text-dark);
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .author-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .author-name {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .author-title {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .testimonials-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: none;
+      background: var(--border-color);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .nav-dot.active {
+      background: var(--primary-color);
+    }
+
+    /* Support Section */
+    .support-section {
+      padding: 5rem 0;
+      background: var(--bg-light);
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .support-info {
+      background: var(--bg-white);
+      padding: 3rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .support-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+
+    .support-description {
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .support-features {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .support-feature {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .feature-icon-small {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .support-feature h4 {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: var(--text-dark);
+    }
+
+    .support-feature p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .support-form {
+      background: var(--bg-white);
+      padding: 3rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid var(--border-color);
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      background: var(--bg-white);
+      color: var(--text-dark);
+      transition: var(--transition);
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .btn-full-width {
+      width: 100%;
+    }
+
+    .btn-icon {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .form-status {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      display: none;
+    }
+
+    .form-status.success {
+      background: #f0fff4;
+      color: #22543d;
+      border: 1px solid #9ae6b4;
+    }
+
+    .form-status.error {
+      background: #fed7d7;
+      color: #742a2a;
+      border: 1px solid #feb2b2;
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      padding: 3rem 0;
+      background: var(--gradient);
+      color: white;
+    }
+
+    .newsletter-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .newsletter-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .newsletter-description {
+      opacity: 0.9;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 1rem;
+      min-width: 300px;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 1rem;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      backdrop-filter: blur(10px);
+    }
+
+    .newsletter-input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--text-dark);
+      color: white;
+      padding: 3rem 0 1rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    .footer-brand-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .footer-description {
+      line-height: 1.6;
+      opacity: 0.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    .social-link svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .footer-heading {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .legal-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .legal-links a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .legal-links a:hover {
+      color: white;
+    }
+
+    .payment-methods {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .payment-methods img {
+      height: 30px;
+      border-radius: 4px;
+    }
+
+    /* Chatbot */
+    .chatbot-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 60px;
+      height: 60px;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+      transition: var(--transition);
+      z-index: 1001;
+    }
+
+    .chatbot-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(102, 126, 234, 0.6);
+    }
+
+    .chatbot-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 350px;
+      height: 500px;
+      background: var(--bg-white);
+      border-radius: var(--border-radius);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      z-index: 1002;
+      transform: translateY(100%) scale(0.8);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .chatbot-container.active {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .chatbot-header {
+      background: var(--primary-color);
+      color: white;
+      padding: 1rem;
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chatbot-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .bot-avatar {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .bot-name {
+      font-weight: 600;
+    }
+
+    .bot-status {
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+
+    .chatbot-controls {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .control-btn {
+      width: 30px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .control-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .chatbot-messages {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .message {
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+
+    .message.user-message {
+      flex-direction: row-reverse;
+    }
+
+    .message-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .bot-message .message-avatar {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .user-message .message-avatar {
+      background: var(--accent-color);
+      color: white;
+    }
+
+    .message-content {
+      background: var(--bg-light);
+      padding: 0.75rem;
+      border-radius: var(--border-radius);
+      max-width: 80%;
+      position: relative;
+    }
+
+    .user-message .message-content {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .message-content p {
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .message-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .message-time {
+      font-size: 0.7rem;
+      color: var(--text-light);
+      margin-top: 0.5rem;
+      align-self: center;
+    }
+
+    .chatbot-quick-replies {
+      padding: 0 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .quick-reply {
+      background: var(--bg-light);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--text-dark);
+    }
+
+    .quick-reply:hover {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    .chatbot-input-form {
+      padding: 1rem;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    #chatbot-input {
+      flex: 1;
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      outline: none;
+      background: var(--bg-white);
+      color: var(--text-dark);
+    }
+
+    #chatbot-input:focus {
+      border-color: var(--primary-color);
+    }
+
+    .send-btn {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .send-btn:hover {
+      background: var(--secondary-color);
+    }
+
+    .send-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    /* Cart Sidebar */
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 400px;
+      height: 100vh;
+      background: var(--bg-white);
+      box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+      z-index: 1003;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-sidebar.active {
+      right: 0;
+    }
+
+    .cart-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1002;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .cart-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .cart-header {
+      padding: 2rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cart-header h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .cart-close {
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-light);
+      transition: var(--transition);
+      font-size: 1.2rem;
+    }
+
+    .cart-close:hover {
+      background: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    .cart-items {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+
+    .empty-cart-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    .empty-cart p {
+      color: var(--text-light);
+      margin-bottom: 2rem;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .cart-item-image {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--border-radius);
+      object-fit: cover;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    .cart-item-price {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .quantity-btn {
+      width: 30px;
+      height: 30px;
+      background: var(--bg-light);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .quantity-btn:hover {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    .quantity {
+      font-weight: 600;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #e53e3e;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+
+    .remove-btn:hover {
+      background: #fed7d7;
+    }
+
+    .cart-footer {
+      padding: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .cart-total {
+      margin-bottom: 2rem;
+    }
+
+    .total-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .total-line.total {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--text-dark);
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    /* Product Modal */
+    .product-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      background: var(--bg-white);
+      border-radius: var(--border-radius);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      z-index: 1004;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .product-modal.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1003;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .modal-header {
+      padding: 2rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-close {
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-light);
+      transition: var(--transition);
+      font-size: 1.2rem;
+    }
+
+    .modal-close:hover {
+      background: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    .modal-body {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      width: 50px;
+      height: 50px;
+      background: var(--bg-white);
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      opacity: 0;
+      visibility: hidden;
+      z-index: 1000;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--primary-color);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .back-to-top svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    /* Fade-in Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: var(--transition);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .container {
+        padding: 0 1.5rem;
+      }
+
+      .nav-container {
+        padding: 1rem 1.5rem;
+      }
+
+      .hero-stats {
+        gap: 2rem;
+      }
+
+      .support-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .newsletter-content {
+        text-align: center;
+        justify-content: center;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--bg-white);
+        box-shadow: var(--shadow);
+        flex-direction: column;
+        padding: 2rem;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+      }
+
+      .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .products-filter {
+        justify-content: center;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonials-slider {
+        margin-bottom: 2rem;
+      }
+
+      .testimonial-content {
+        padding: 2rem;
+      }
+
+      .newsletter-form {
+        width: 100%;
+        min-width: auto;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+
+      .chatbot-container {
+        width: 90%;
+        height: 80%;
+        right: 5%;
+        bottom: 5%;
+      }
+
+      .cart-sidebar {
+        width: 100%;
+        right: -100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .testimonial-content {
+        padding: 1.5rem;
+      }
+
+      .support-info,
+      .support-form {
+        padding: 2rem;
+      }
+
+      .legal-links {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Loading Screen -->
@@ -58,6 +1824,7 @@
         <a href="#products" class="nav-link" data-section="products">Products</a>
         <a href="#features" class="nav-link" data-section="features">Features</a>
         <a href="#support" class="nav-link" data-section="support">Support</a>
+        <a href="#" class="nav-link" onclick="toggleCart()">Cart (<span id="cart-count">0</span>)</a>
       </div>
       
       <div class="nav-toggle" id="nav-toggle">
@@ -68,54 +1835,53 @@
     </div>
   </nav>
 
- <!-- Updated Hero Section with View All Products Link -->
-<section class="hero" id="hero">
+  <!-- Hero Section -->
+  <section class="hero" id="home">
     <div class="hero-pattern"></div>
     <div class="container">
-        <div class="hero-content fade-in">
-            <div class="hero-badge">
-                <span class="badge-text">🚀 Now Available</span>
-            </div>
-            
-            <h1 class="hero-title">
-                The Future of
-                <span class="gradient-text">Footwear</span>
-            </h1>
-            
-            <h2 class="hero-subtitle">One Shoe, Infinite Possibilities</h2>
-            
-            <p class="hero-description">
-                Transform your shoes instantly with FlexCore's revolutionary modular system. 
-                From running to formal wear, adapt to any situation with just one pair.
-            </p>
-            
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number">10+</span>
-                    <span class="stat-label">Core Styles</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">50K+</span>
-                    <span class="stat-label">Happy Users</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">30s</span>
-                    <span class="stat-label">Quick Switch</span>
-                </div>
-            </div>
-            
-            <div class="hero-actions">
-                <button class="btn btn-primary btn-large" onclick="viewAllProducts()">
-                    View All Products
-                </button>
-                <button class="btn btn-secondary btn-large" onclick="smoothScrollTo('#features')">
-                    Learn More
-                </button>
-            </div>
+      <div class="hero-content fade-in">
+        <div class="hero-badge">
+          <span class="badge-text">🚀 Now Available</span>
         </div>
+        
+        <h1 class="hero-title">
+          The Future of
+          <span class="gradient-text">Footwear</span>
+        </h1>
+        
+        <h2 class="hero-subtitle">One Shoe, Infinite Possibilities</h2>
+        
+        <p class="hero-description">
+          Transform your shoes instantly with FlexCore's revolutionary modular system. 
+          From running to formal wear, adapt to any situation with just one pair.
+        </p>
+        
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number">10+</span>
+            <span class="stat-label">Core Styles</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">50K+</span>
+            <span class="stat-label">Happy Users</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">30s</span>
+            <span class="stat-label">Quick Switch</span>
+          </div>
+        </div>
+        
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-large" onclick="smoothScrollTo('#products')">
+            View All Products
+          </button>
+          <button class="btn btn-secondary btn-large" onclick="smoothScrollTo('#features')">
+            Learn More
+          </button>
+        </div>
+      </div>
     </div>
-</section>
-
+    
     <div class="scroll-indicator" onclick="smoothScrollTo('#products')">
       <div class="scroll-mouse">
         <div class="scroll-wheel"></div>
@@ -139,8 +1905,8 @@
         <button class="filter-btn" data-filter="kits">Starter Kits</button>
       </div>
       
-      <div class="products-grid">
-        <div class="product-card" data-category="base">
+      <div class="products-grid" id="products-grid">
+        <div class="product-card" data-category="base" data-product="basic-bare">
           <div class="product-image-container">
             <img src="https://i.imgur.com/GuSEaVq.png" alt="Basic Bare" class="product-image">
             <div class="product-overlay">
@@ -159,13 +1925,13 @@
               <span class="price-current">$19.99</span>
               <span class="price-original">$24.99</span>
             </div>
-            <button class="btn btn-primary btn-product" onclick="addToCart('basic-bare')">
+            <button class="btn btn-primary btn-product" onclick="addToCart('basic-bare', 'Basic Bare', 19.99, 'https://i.imgur.com/GuSEaVq.png')">
               Add to Cart
             </button>
           </div>
         </div>
 
-        <div class="product-card featured" data-category="kits">
+        <div class="product-card featured" data-category="kits" data-product="starter-kit">
           <div class="product-ribbon">Best Value</div>
           <div class="product-image-container">
             <img src="https://i.imgur.com/myAyR8N.png" alt="Starter Kit" class="product-image">
@@ -186,13 +1952,13 @@
               <span class="price-original">$109.97</span>
               <span class="price-save">Save $14.98!</span>
             </div>
-            <button class="btn btn-primary btn-product" onclick="addToCart('starter-kit')">
+            <button class="btn btn-primary btn-product" onclick="addToCart('starter-kit', 'Complete Starter Kit', 94.99, 'https://i.imgur.com/myAyR8N.png')">
               Add to Cart
             </button>
           </div>
         </div>
 
-        <div class="product-card" data-category="cores">
+        <div class="product-card" data-category="cores" data-product="casual-cores">
           <div class="product-image-container">
             <img src="https://i.imgur.com/MfhviPW.png" alt="Casual Cores" class="product-image">
             <div class="product-overlay">
@@ -210,13 +1976,13 @@
             <div class="product-price">
               <span class="price-current">$19.99</span>
             </div>
-            <button class="btn btn-primary btn-product" onclick="addToCart('casual-cores')">
+            <button class="btn btn-primary btn-product" onclick="addToCart('casual-cores', 'Casual Cores', 19.99, 'https://i.imgur.com/MfhviPW.png')">
               Add to Cart
             </button>
           </div>
         </div>
 
-        <div class="product-card" data-category="cores">
+        <div class="product-card" data-category="cores" data-product="cleat-cores">
           <div class="product-image-container">
             <img src="http://i.imgur.com/KmfodAU.png" alt="Cleat Cores" class="product-image">
             <div class="product-overlay">
@@ -234,13 +2000,13 @@
             <div class="product-price">
               <span class="price-current">$19.99</span>
             </div>
-            <button class="btn btn-primary btn-product" onclick="addToCart('cleat-cores')">
+            <button class="btn btn-primary btn-product" onclick="addToCart('cleat-cores', 'Professional Cleat Cores', 19.99, 'http://i.imgur.com/KmfodAU.png')">
               Add to Cart
             </button>
           </div>
         </div>
 
-        <div class="product-card" data-category="cores">
+        <div class="product-card" data-category="cores" data-product="roller-cores">
           <div class="product-image-container">
             <img src="https://i.imgur.com/MuvrLOV.png" alt="Roller Cores" class="product-image">
             <div class="product-overlay">
@@ -258,13 +2024,13 @@
             <div class="product-price">
               <span class="price-current">$19.99</span>
             </div>
-            <button class="btn btn-primary btn-product" onclick="addToCart('roller-cores')">
+            <button class="btn btn-primary btn-product" onclick="addToCart('roller-cores', 'Roller Cores', 19.99, 'https://i.imgur.com/MuvrLOV.png')">
               Add to Cart
             </button>
           </div>
         </div>
 
-        <div class="product-card" data-category="cores">
+        <div class="product-card" data-category="cores" data-product="running-cores">
           <div class="product-image-container">
             <img src="https://i.imgur.com/kyuImHk.png" alt="Running Cores" class="product-image">
             <div class="product-overlay">
@@ -282,177 +2048,72 @@
             <div class="product-price">
               <span class="price-current">$19.99</span>
             </div>
-            <button class="btn btn-primary btn-product" onclick="addToCart('running-cores')">
+            <button class="btn btn-primary btn-product" onclick="addToCart('running-cores', 'Performance Running Cores', 19.99, 'https://i.imgur.com/kyuImHk.png')">
               Add to Cart
             </button>
           </div>
         </div>
       </div>
-      
-      <div class="products-cta">
-        <a href="pages/shop.html" class="btn btn-outline btn-large">
-          View All Products
-        </a>
-      </div>
     </div>
   </section>
 
-  <!-- Updated Features Section with Interactive Links -->
-<section class="features-section section" id="features">
+  <!-- Features Section -->
+  <section class="features-section section" id="features">
     <div class="container">
-        <div class="section-header fade-in">
-            <h2 class="section-title">Why Choose FlexCore?</h2>
-            <p class="section-subtitle">
-                Discover the revolutionary features that make FlexCore the ultimate footwear solution
-            </p>
+      <div class="section-header fade-in">
+        <h2 class="section-title">Why Choose FlexCore?</h2>
+        <p class="section-subtitle">
+          Discover the revolutionary features that make FlexCore the ultimate footwear solution
+        </p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card fade-in" onclick="showFeatureInfo('instant-transform')">
+          <div class="feature-icon">⚡</div>
+          <h3 class="feature-title">Instant Transform</h3>
+          <p class="feature-description">
+            Switch between different shoe styles in under 30 seconds. From running shoes to formal wear instantly.
+          </p>
         </div>
         
-        <div class="features-grid">
-            <a href="instant-transform.html" class="feature-card fade-in" data-link="instant-transform">
-                <div class="feature-icon">⚡</div>
-                <h3 class="feature-title">Instant Transform</h3>
-                <p class="feature-description">
-                    Switch between different shoe styles in under 30 seconds. From running shoes to formal wear instantly.
-                </p>
-            </a>
-            
-            <a href="cost-effective.html" class="feature-card fade-in" data-link="cost-effective">
-                <div class="feature-icon">💰</div>
-                <h3 class="feature-title">Cost-Effective</h3>
-                <p class="feature-description">
-                    Save hundreds of dollars by replacing multiple shoes with one adaptable system. Calculate your savings now.
-                </p>
-            </a>
-            
-            <a href="space-saving.html" class="feature-card fade-in" data-link="space-saving">
-                <div class="feature-icon">🏠</div>
-                <h3 class="feature-title">Space-Saving</h3>
-                <p class="feature-description">
-                    Reduce your shoe collection by 80%. One base shoe plus compact cores replaces your entire closet.
-                </p>
-            </a>
-            
-            <a href="eco-friendly.html" class="feature-card fade-in" data-link="eco-friendly">
-                <div class="feature-icon">🌱</div>
-                <h3 class="feature-title">Eco-Friendly</h3>
-                <p class="feature-description">
-                    Reduce waste and carbon footprint. Learn about our sustainable materials and environmental impact.
-                </p>
-            </a>
-            
-            <a href="premium-comfort.html" class="feature-card fade-in" data-link="premium-comfort">
-                <div class="feature-icon">☁️</div>
-                <h3 class="feature-title">Premium Comfort</h3>
-                <p class="feature-description">
-                    Advanced cushioning and ergonomic design. Experience our comfort technology and customization options.
-                </p>
-            </a>
-            
-            <a href="universal-compatibility.html" class="feature-card fade-in" data-link="universal-compatibility">
-                <div class="feature-icon">🔧</div>
-                <h3 class="feature-title">Universal Compatibility</h3>
-                <p class="feature-description">
-                    All cores work with any FlexCore base shoe. Explore our complete ecosystem and mixing possibilities.
-                </p>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- JavaScript to track feature clicks -->
-<script>
-function trackFeatureClick(featureName) {
-    // Track analytics event
-    console.log('Feature clicked:', featureName);
-    
-    // In a real implementation, send to analytics
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'feature_click', {
-            feature_name: featureName,
-            event_category: 'features'
-        });
-    }
-}
-
-// Add click tracking to feature cards
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.feature-card[data-link]').forEach(card => {
-        card.addEventListener('click', function(e) {
-            const featureName = this.getAttribute('data-link');
-            trackFeatureClick(featureName);
-        });
-    });
-});
-</script>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-              <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
-              <line x1="12" y1="22.08" x2="12" y2="12"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Sustainable Future</h3>
+        <div class="feature-card fade-in" onclick="showFeatureInfo('cost-effective')">
+          <div class="feature-icon">💰</div>
+          <h3 class="feature-title">Cost-Effective</h3>
           <p class="feature-description">
-            Made from 70% recycled materials with carbon-neutral shipping. 
-            Look good while doing good for the planet.
+            Save hundreds of dollars by replacing multiple shoes with one adaptable system. Calculate your savings now.
           </p>
-          <div class="feature-link">
-            <a href="#" class="link-with-arrow">See sustainability report</a>
-          </div>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M14 9V5a3 3 0 0 0-6 0v4"/>
-              <rect x="2" y="9" width="20" height="11" rx="2" ry="2"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Secure Attachment</h3>
+        
+        <div class="feature-card fade-in" onclick="showFeatureInfo('space-saving')">
+          <div class="feature-icon">🏠</div>
+          <h3 class="feature-title">Space-Saving</h3>
           <p class="feature-description">
-            Patented QuickLock™ system ensures cores stay firmly attached during any activity. 
-            No slipping, no sliding, just confidence.
+            Reduce your shoe collection by 80%. One base shoe plus compact cores replaces your entire closet.
           </p>
-          <div class="feature-link">
-            <a href="#" class="link-with-arrow">How QuickLock works</a>
-          </div>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M3 6h18l-2 9H7L5 4H2"/>
-              <circle cx="9" cy="20" r="1"/>
-              <circle cx="20" cy="20" r="1"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Smart Investment</h3>
+        
+        <div class="feature-card fade-in" onclick="showFeatureInfo('eco-friendly')">
+          <div class="feature-icon">🌱</div>
+          <h3 class="feature-title">Eco-Friendly</h3>
           <p class="feature-description">
-            Why buy 10 pairs when you can have endless variety with one base? 
-            Save money and closet space.
+            Reduce waste and carbon footprint. Learn about our sustainable materials and environmental impact.
           </p>
-          <div class="feature-link">
-            <a href="#" class="link-with-arrow">Calculate your savings</a>
-          </div>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4v-7zM15 11h4a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2h-4v-7z"/>
-              <path d="M9 7H5a2 2 0 0 0-2 2v2h6V7zM15 7h4a2 2 0 0 1 2 2v2h-6V7z"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Easy Maintenance</h3>
+        
+        <div class="feature-card fade-in" onclick="showFeatureInfo('premium-comfort')">
+          <div class="feature-icon">☁️</div>
+          <h3 class="feature-title">Premium Comfort</h3>
           <p class="feature-description">
-            Detachable cores mean easier cleaning and longer lifespan. 
-            Keep your shoes looking fresh with minimal effort.
+            Advanced cushioning and ergonomic design. Experience our comfort technology and customization options.
           </p>
-          <div class="feature-link">
-            <a href="#" class="link-with-arrow">Care instructions</a>
-          </div>
+        </div>
+        
+        <div class="feature-card fade-in" onclick="showFeatureInfo('universal-compatibility')">
+          <div class="feature-icon">🔧</div>
+          <h3 class="feature-title">Universal Compatibility</h3>
+          <p class="feature-description">
+            All cores work with any FlexCore base shoe. Explore our complete ecosystem and mixing possibilities.
+          </p>
         </div>
       </div>
     </div>
@@ -517,12 +2178,48 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
           </div>
         </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">
+              "I love how sustainable FlexCore is. Instead of buying new shoes every season, 
+              I just get new cores. It's better for my wallet and the planet!"
+            </p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=64&h=64&fit=crop&crop=face" alt="Emma Davis" class="author-avatar">
+              <div class="author-info">
+                <div class="author-name">Emma Davis</div>
+                <div class="author-title">Environmental Scientist</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">
+              "The versatility is amazing! I use the same base for my morning workout, 
+              work meetings, and weekend adventures. FlexCore fits my lifestyle perfectly."
+            </p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=64&h=64&fit=crop&crop=face" alt="James Wilson" class="author-avatar">
+              <div class="author-info">
+                <div class="author-name">James Wilson</div>
+                <div class="author-title">Digital Nomad</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       
       <div class="testimonials-nav">
         <button class="nav-dot active" onclick="showTestimonial(0)"></button>
         <button class="nav-dot" onclick="showTestimonial(1)"></button>
         <button class="nav-dot" onclick="showTestimonial(2)"></button>
+        <button class="nav-dot" onclick="showTestimonial(3)"></button>
+        <button class="nav-dot" onclick="showTestimonial(4)"></button>
       </div>
     </div>
   </section>
@@ -567,7 +2264,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
         </div>
         
-        <form class="support-form" id="supportForm">
+        <form class="support-form" id="supportForm" onsubmit="handleSupportForm(event)">
           <div class="form-group">
             <label for="name" class="form-label">Full Name</label>
             <input type="text" id="name" name="name" class="form-input" required placeholder="Enter your full name">
@@ -620,7 +2317,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </p>
         </div>
         
-        <form class="newsletter-form" id="newsletter-form">
+        <form class="newsletter-form" id="newsletter-form" onsubmit="handleNewsletterForm(event)">
           <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
           <button type="submit" class="btn btn-primary">Subscribe</button>
         </form>
@@ -660,10 +2357,10 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="footer-section">
           <h4 class="footer-heading">Products</h4>
           <ul class="footer-links">
-            <li><a href="pages/shop.html">All Products</a></li>
-            <li><a href="pages/shop.html?filter=base">Base Shoes</a></li>
-            <li><a href="pages/shop.html?filter=cores">Cores Collection</a></li>
-            <li><a href="pages/shop.html?filter=kits">Starter Kits</a></li>
+            <li><a href="#products">All Products</a></li>
+            <li><a href="#" onclick="filterProducts('base')">Base Shoes</a></li>
+            <li><a href="#" onclick="filterProducts('cores')">Cores Collection</a></li>
+            <li><a href="#" onclick="filterProducts('kits')">Starter Kits</a></li>
             <li><a href="#" onclick="showComingSoon()">Accessories</a></li>
           </ul>
         </div>
@@ -671,22 +2368,22 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="footer-section">
           <h4 class="footer-heading">Support</h4>
           <ul class="footer-links">
-            <li><a href="pages/support.html">Help Center</a></li>
-            <li><a href="pages/support.html#faq">FAQ</a></li>
-            <li><a href="pages/support.html#returns">Returns & Exchanges</a></li>
-            <li><a href="pages/support.html#warranty">Warranty</a></li>
-            <li><a href="pages/support.html#contact">Contact Us</a></li>
+            <li><a href="#support">Help Center</a></li>
+            <li><a href="#" onclick="toggleChatbot()">Live Chat</a></li>
+            <li><a href="#" onclick="showComingSoon()">Returns & Exchanges</a></li>
+            <li><a href="#" onclick="showComingSoon()">Warranty</a></li>
+            <li><a href="#support">Contact Us</a></li>
           </ul>
         </div>
         
         <div class="footer-section">
           <h4 class="footer-heading">Company</h4>
           <ul class="footer-links">
-            <li><a href="pages/about.html">About FlexCore</a></li>
-            <li><a href="pages/sustainability.html">Sustainability</a></li>
-            <li><a href="pages/careers.html">Careers</a></li>
-            <li><a href="pages/press.html">Press Kit</a></li>
-            <li><a href="pages/blog.html">Blog</a></li>
+            <li><a href="#" onclick="showComingSoon()">About FlexCore</a></li>
+            <li><a href="#" onclick="showComingSoon()">Sustainability</a></li>
+            <li><a href="#" onclick="showComingSoon()">Careers</a></li>
+            <li><a href="#" onclick="showComingSoon()">Press Kit</a></li>
+            <li><a href="#" onclick="showComingSoon()">Blog</a></li>
           </ul>
         </div>
       </div>
@@ -695,9 +2392,9 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="footer-legal">
           <p>&copy; 2024 FlexCore. All rights reserved.</p>
           <div class="legal-links">
-            <a href="pages/privacy.html">Privacy Policy</a>
-            <a href="pages/terms.html">Terms of Service</a>
-            <a href="pages/cookies.html">Cookie Policy</a>
+            <a href="#" onclick="showComingSoon()">Privacy Policy</a>
+            <a href="#" onclick="showComingSoon()">Terms of Service</a>
+            <a href="#" onclick="showComingSoon()">Cookie Policy</a>
           </div>
         </div>
         <div class="footer-payment">
@@ -713,7 +2410,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </footer>
 
   <!-- Chatbot -->
-  <div class="chatbot-toggle" id="chatbot-toggle">
+  <div class="chatbot-toggle" id="chatbot-toggle" onclick="toggleChatbot()">
     💬
   </div>
   
@@ -829,23 +2526,575 @@ document.addEventListener('DOMContentLoaded', function() {
     </svg>
   </button>
 
-  <!-- JavaScript Files -->
-  <script src="js/main.js"></script>
-  <script src="js/chatbot.js"></script>
-  <script src="js/animations.js"></script>
-  
-  <!-- Performance and Analytics -->
   <script>
-    // Simple performance tracking
+    // Global Variables
+    let cart = [];
+    let currentTestimonial = 0;
+    const testimonials = document.querySelectorAll('.testimonial-card');
+    const totalTestimonials = testimonials.length;
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(() => {
+        document.getElementById('loading-screen').classList.add('hidden');
+        initializeAnimations();
+        startTestimonialRotation();
+      }, 2000);
+
+      // Initialize navigation
+      setupNavigation();
+      setupScrollEffects();
+      setupProductFilters();
+    });
+
+    // Navigation Functions
+    function setupNavigation() {
+      const navToggle = document.getElementById('nav-toggle');
+      const navMenu = document.getElementById('nav-menu');
+      
+      navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+          navMenu.classList.remove('active');
+        }
+      });
+
+      // Handle nav link clicks
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          if (link.getAttribute('href').startsWith('#')) {
+            e.preventDefault();
+            const target = link.getAttribute('href');
+            smoothScrollTo(target);
+            
+            // Update active link
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            
+            // Close mobile menu
+            navMenu.classList.remove('active');
+          }
+        });
+      });
+    }
+
+    // Smooth scroll function
+    function smoothScrollTo(target) {
+      const element = document.querySelector(target);
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }
+
+    // Scroll effects
+    function setupScrollEffects() {
+      const navbar = document.getElementById('navbar');
+      const backToTop = document.getElementById('back-to-top');
+
+      window.addEventListener('scroll', () => {
+        // Navbar scroll effect
+        if (window.scrollY > 100) {
+          navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+          navbar.style.backdropFilter = 'blur(20px)';
+          backToTop.classList.add('visible');
+        } else {
+          navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+          navbar.style.backdropFilter = 'blur(10px)';
+          backToTop.classList.remove('visible');
+        }
+
+        // Update active nav link based on scroll position
+        const sections = ['home', 'products', 'features', 'support'];
+        let current = '';
+
+        sections.forEach(section => {
+          const element = document.getElementById(section);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            if (rect.top <= 100 && rect.bottom >= 100) {
+              current = section;
+            }
+          }
+        });
+
+        if (current) {
+          document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }
+
+    // Animation initialization
+    function initializeAnimations() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+      });
+    }
+
+    // Product Filter Functions
+    function setupProductFilters() {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const productCards = document.querySelectorAll('.product-card');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.getAttribute('data-filter');
+          
+          // Update active filter button
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          // Filter products
+          filterProducts(filter);
+        });
+      });
+    }
+
+    function filterProducts(filter) {
+      const productCards = document.querySelectorAll('.product-card');
+      
+      productCards.forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.style.display = 'block';
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 100);
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 300);
+        }
+      });
+    }
+
+    // Cart Functions
+    function addToCart(id, name, price, image) {
+      const existingItem = cart.find(item => item.id === id);
+      
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({
+          id: id,
+          name: name,
+          price: price,
+          image: image,
+          quantity: 1
+        });
+      }
+      
+      updateCartUI();
+      showNotification(`${name} added to cart!`, 'success');
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(item => item.id !== id);
+      updateCartUI();
+    }
+
+    function updateQuantity(id, change) {
+      const item = cart.find(item => item.id === id);
+      if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+          removeFromCart(id);
+        } else {
+          updateCartUI();
+        }
+      }
+    }
+
+    function updateCartUI() {
+      const cartItems = document.getElementById('cart-items');
+      const cartCount = document.getElementById('cart-count');
+      const cartSubtotal = document.getElementById('cart-subtotal');
+      const cartTotal = document.getElementById('cart-total');
+      const cartFooter = document.getElementById('cart-footer');
+      
+      // Update cart count
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartCount.textContent = totalItems;
+      
+      if (cart.length === 0) {
+        cartItems.innerHTML = `
+          <div class="empty-cart">
+            <div class="empty-cart-icon">🛒</div>
+            <p>Your cart is empty</p>
+            <button class="btn btn-primary" onclick="toggleCart(); smoothScrollTo('#products');">
+              Start Shopping
+            </button>
+          </div>
+        `;
+        cartFooter.style.display = 'none';
+      } else {
+        cartItems.innerHTML = cart.map(item => `
+          <div class="cart-item">
+            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">${item.price.toFixed(2)}</div>
+              <div class="cart-item-controls">
+                <div class="quantity-controls">
+                  <button class="quantity-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
+                  <span class="quantity">${item.quantity}</span>
+                  <button class="quantity-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+                </div>
+                <button class="remove-btn" onclick="removeFromCart('${item.id}')">🗑️</button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+        
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        cartSubtotal.textContent = `${subtotal.toFixed(2)}`;
+        cartTotal.textContent = `${subtotal.toFixed(2)}`;
+        cartFooter.style.display = 'block';
+      }
+    }
+
+    function toggleCart() {
+      const cartSidebar = document.getElementById('cart-sidebar');
+      const cartOverlay = document.getElementById('cart-overlay');
+      
+      cartSidebar.classList.toggle('active');
+      cartOverlay.classList.toggle('active');
+      
+      if (cartSidebar.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+
+    function proceedToCheckout() {
+      showNotification('Checkout functionality coming soon!', 'info');
+    }
+
+    // Product Modal Functions
+    function viewProduct(productId) {
+      const productData = {
+        'basic-bare': {
+          title: 'Basic Bare',
+          image: 'https://i.imgur.com/GuSEaVq.png',
+          price: '$19.99',
+          originalPrice: '$24.99',
+          description: 'The foundation of your FlexCore system. This minimalist base shoe features premium materials and ergonomic design for all-day comfort.',
+          features: ['Breathable mesh upper', 'Cushioned insole', 'Flexible sole design', 'Quick-lock core system', 'Available in 5 colors']
+        },
+        'starter-kit': {
+          title: 'Complete Starter Kit',
+          image: 'https://i.imgur.com/myAyR8N.png',
+          price: '$94.99',
+          originalPrice: '$109.97',
+          description: 'Perfect for beginners! Includes one Basic Bare shoe plus your choice of any 2 cores. Everything you need to start your FlexCore journey.',
+          features: ['1x Basic Bare shoe', 'Choice of 2 cores', 'Quick-start guide', 'Care instructions', '30-day money-back guarantee']
+        },
+        'casual-cores': {
+          title: 'Casual Cores',
+          image: 'https://i.imgur.com/MfhviPW.png',
+          price: '$19.99',
+          description: 'Versatile cores perfect for everyday wear and social events. Comfortable enough for all-day wear, stylish enough for any occasion.',
+          features: ['Premium rubber sole', 'Slip-resistant grip', 'Easy 30-second attachment', 'Available in multiple colors', 'Machine washable']
+        }
+      };
+      
+      const product = productData[productId];
+      if (!product) return;
+      
+      const modalTitle = document.getElementById('modal-title');
+      const modalBody = document.getElementById('modal-body');
+      
+      modalTitle.textContent = product.title;
+      modalBody.innerHTML = `
+        <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 250px;">
+            <img src="${product.image}" alt="${product.title}" style="width: 100%; border-radius: 12px;">
+          </div>
+          <div style="flex: 1; min-width: 250px;">
+            <div style="margin-bottom: 1rem;">
+              <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);">${product.price}</span>
+              ${product.originalPrice ? `<span style="text-decoration: line-through; color: var(--text-light); margin-left: 0.5rem;">${product.originalPrice}</span>` : ''}
+            </div>
+            <p style="margin-bottom: 2rem; line-height: 1.6;">${product.description}</p>
+            <h4 style="margin-bottom: 1rem;">Features:</h4>
+            <ul style="list-style: none; padding: 0;">
+              ${product.features.map(feature => `<li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">✓ ${feature}</li>`).join('')}
+            </ul>
+            <button class="btn btn-primary btn-large" style="margin-top: 2rem; width: 100%;" onclick="closeProductModal()">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      `;
+      
+      showProductModal();
+    }
+
+    function showProductModal() {
+      const modal = document.getElementById('product-modal');
+      const overlay = document.getElementById('modal-overlay');
+      
+      modal.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProductModal() {
+      const modal = document.getElementById('product-modal');
+      const overlay = document.getElementById('modal-overlay');
+      
+      modal.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Testimonial Functions
+    function showTestimonial(index) {
+      testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+      document.querySelectorAll('.nav-dot').forEach(dot => dot.classList.remove('active'));
+      
+      testimonials[index].classList.add('active');
+      document.querySelectorAll('.nav-dot')[index].classList.add('active');
+      
+      currentTestimonial = index;
+    }
+
+    function nextTestimonial() {
+      const nextIndex = (currentTestimonial + 1) % totalTestimonials;
+      showTestimonial(nextIndex);
+    }
+
+    function startTestimonialRotation() {
+      setInterval(nextTestimonial, 5000); // Change every 5 seconds
+    }
+
+    // Feature Functions
+    function showFeatureInfo(featureName) {
+      const featureInfo = {
+        'instant-transform': 'Experience lightning-fast shoe transformations! Our patented QuickLock system allows you to switch between different cores in under 30 seconds.',
+        'cost-effective': 'Save money with FlexCore! Instead of buying multiple pairs of shoes, invest in one base and multiple cores. Calculate your savings with our online calculator.',
+        'space-saving': 'Minimize your footprint! One FlexCore base plus compact cores can replace an entire shoe collection, perfect for small spaces and travel.',
+        'eco-friendly': 'Join the sustainable footwear revolution! Made from 70% recycled materials with carbon-neutral shipping and packaging.',
+        'premium-comfort': 'Experience unmatched comfort with our advanced cushioning technology and ergonomic design, tested by athletes and professionals.',
+        'universal-compatibility': 'Mix and match any core with any FlexCore base shoe. Our universal system ensures perfect compatibility across our entire product line.'
+      };
+      
+      showNotification(featureInfo[featureName] || 'Learn more about this feature in our detailed guides!', 'info');
+    }
+
+    // Chatbot Functions
+    let chatbotOpen = false;
+    let darkMode = false;
+
+    function toggleChatbot() {
+      const chatbot = document.getElementById('chatbot-container');
+      const toggle = document.getElementById('chatbot-toggle');
+      
+      chatbotOpen = !chatbotOpen;
+      
+      if (chatbotOpen) {
+        chatbot.classList.add('active');
+        toggle.style.display = 'none';
+      } else {
+        chatbot.classList.remove('active');
+        toggle.style.display = 'flex';
+      }
+    }
+
+    function toggleDarkMode() {
+      darkMode = !darkMode;
+      document.body.classList.toggle('dark-mode', darkMode);
+      
+      const chatbot = document.querySelector('.chatbot-container');
+      if (chatbot) {
+        chatbot.classList.toggle('dark-mode', darkMode);
+      }
+    }
+
+    function sendMessage(event) {
+      event.preventDefault();
+      const input = document.getElementById('chatbot-input');
+      const message = input.value.trim();
+      
+      if (!message) return;
+      
+      addChatMessage(message, 'user');
+      input.value = '';
+      
+      // Simulate bot response
+      setTimeout(() => {
+        const response = getBotResponse(message);
+        addChatMessage(response, 'bot');
+      }, 1000);
+    }
+
+    function handleQuickReply(message) {
+      addChatMessage(message, 'user');
+      
+      setTimeout(() => {
+        const response = getBotResponse(message);
+        addChatMessage(response, 'bot');
+      }, 1000);
+    }
+
+    function addChatMessage(message, sender) {
+      const messagesContainer = document.getElementById('chatbot-messages');
+      const messageElement = document.createElement('div');
+      messageElement.className = `message ${sender}-message`;
+      
+      const now = new Date();
+      const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      
+      messageElement.innerHTML = `
+        <div class="message-avatar">${sender === 'user' ? '👤' : '🤖'}</div>
+        <div class="message-content">
+          <p>${message}</p>
+        </div>
+        <div class="message-time">${time}</div>
+      `;
+      
+      messagesContainer.appendChild(messageElement);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function getBotResponse(message) {
+      const responses = {
+        'how does flexcore work?': 'FlexCore uses our patented QuickLock system! Simply align the core with your base shoe and twist to lock. The magnetic alignment ensures perfect positioning every time. You can switch between cores in under 30 seconds!',
+        'what are the shipping options?': 'We offer free standard shipping (5-7 business days) on all orders over $50. Express shipping (2-3 days) is available for $9.99, and next-day delivery for $19.99. All orders are tracked and insured!',
+        'can i return my order?': 'Absolutely! We offer a 30-day money-back guarantee. If you\'re not completely satisfied, return your FlexCore products in original condition for a full refund. Return shipping is free within the US.',
+        'what sizes are available?': 'FlexCore base shoes are available in US sizes 6-14 for both men and women, including half sizes. Our cores are designed to work with all base shoe sizes universally.',
+        'how long do they last?': 'FlexCore shoes are built to last! Our base shoes are tested for over 1000+ core swaps, and individual cores are designed for daily wear over 6+ months. We also offer a 1-year warranty on all products.'
+      };
+      
+      const lowerMessage = message.toLowerCase();
+      
+      for (const [key, response] of Object.entries(responses)) {
+        if (lowerMessage.includes(key.toLowerCase().replace('?', ''))) {
+          return response;
+        }
+      }
+      
+      // Default responses
+      const defaultResponses = [
+        "Thanks for your question! For detailed information, please check our FAQ section or contact our support team directly.",
+        "I'd be happy to help! Could you please be more specific about what you'd like to know about FlexCore?",
+        "Great question! Our support team can provide detailed assistance. Would you like me to connect you with a human agent?",
+        "I'm here to help with FlexCore questions! Try asking about how our products work, shipping, returns, or sizing."
+      ];
+      
+      return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+    }
+
+    // Form Functions
+    function handleSupportForm(event) {
+      event.preventDefault();
+      const formStatus = document.getElementById('form-status');
+      
+      // Simulate form submission
+      formStatus.textContent = 'Sending message...';
+      formStatus.className = 'form-status';
+      formStatus.style.display = 'block';
+      
+      setTimeout(() => {
+        formStatus.textContent = 'Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.';
+        formStatus.className = 'form-status success';
+        
+        // Reset form
+        document.getElementById('supportForm').reset();
+        
+        setTimeout(() => {
+          formStatus.style.display = 'none';
+        }, 5000);
+      }, 2000);
+    }
+
+    function handleNewsletterForm(event) {
+      event.preventDefault();
+      const email = event.target.querySelector('input[type="email"]').value;
+      
+      showNotification(`Thank you! ${email} has been subscribed to our newsletter.`, 'success');
+      event.target.reset();
+    }
+
+    // Utility Functions
+    function showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: ${type === 'success' ? '#48bb78' : type === 'error' ? '#f56565' : '#4299e1'};
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        z-index: 10000;
+        max-width: 300px;
+        animation: slideIn 0.3s ease;
+      `;
+      notification.textContent = message;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 300);
+      }, 4000);
+    }
+
+    function showComingSoon() {
+      showNotification('This feature is coming soon! Stay tuned for updates.', 'info');
+    }
+
+    // Add CSS animations for notifications
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Performance tracking
     window.addEventListener('load', () => {
       const loadTime = performance.now();
       console.log(`Page loaded in ${Math.round(loadTime)}ms`);
     });
-    
-    // Simple analytics (replace with your analytics service)
+
+    // Analytics tracking
     function trackEvent(category, action, label) {
       console.log(`Analytics: ${category} - ${action} - ${label}`);
-      // gtag('event', action, { event_category: category, event_label: label });
+      // In production, replace with actual analytics code
     }
   </script>
 </body>
