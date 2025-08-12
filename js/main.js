@@ -199,6 +199,66 @@ function setupScrollEffects() {
     });
 }
 
+// Add these missing functions
+function setupTestimonials() {
+    // Placeholder for testimonials functionality
+}
+
+function setupForms() {
+    // Placeholder for forms functionality
+}
+
+function setupCart() {
+    // Initialize cart UI
+    updateCartUI();
+}
+
+function setupBackToTop() {
+    // Placeholder for back to top functionality
+}
+
+function updateSpaceOrganizer() {
+    // Placeholder for space organizer functionality
+    console.log('Space organizer updated');
+}
+
+function startAnimations() {
+    // Placeholder for starting animations
+    console.log('Animations started');
+}
+
+function trackAnalytics() {
+    // Placeholder for analytics
+    console.log('Analytics initialized');
+}
+
+function trackEvent(category, action, label) {
+    console.log(`Analytics: ${category} - ${action} - ${label}`);
+}
+
+function updateCartUI() {
+    const cartCount = document.getElementById('cart-count');
+    if (cartCount) {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCount.textContent = totalItems;
+    }
+}
+
+function showCartNotification(productName) {
+    // Simple notification
+    console.log(`${productName} added to cart!`);
+}
+
+function closeProductModal() {
+    const modal = document.getElementById('product-modal');
+    const modalOverlay = document.getElementById('modal-overlay');
+    
+    if (modal) modal.style.display = 'none';
+    if (modalOverlay) modalOverlay.style.display = 'none';
+    document.body.style.overflow = '';
+}
+
+
 // Animations Setup
 function setupAnimations() {
     // Add stagger animation to grid items
@@ -343,6 +403,29 @@ function initializeGlobe() {
   }
 }
 
+function initializeApp() {
+    handleLoading();
+    setupNavigation();
+    setupScrollEffects();
+    setupAnimations();
+    setupProductFilters();
+    setupTestimonials();
+    setupForms();
+    setupCart();
+    setupBackToTop();
+    
+    // Add these missing initializations
+    try {
+        initializeGlobe();
+    } catch (error) {
+        console.warn('Globe failed to initialize:', error);
+    }
+    
+    updateSpaceOrganizer();
+    startAnimations();
+    trackAnalytics();
+}
+
 function initializeEverything() {
   setupNavigation();
   setupScrollEffects();
@@ -358,6 +441,19 @@ function initializeEverything() {
   updateSpaceOrganizer();
   startAnimations();
 }
+
+// Add these missing variables after your existing global variables
+let globe, globeRenderer, globeScene, globeCamera;
+let isGlobeInitialized = false;
+let currentConfiguration = {
+  color: 'black',
+  size: '9',
+  core: 'casual',
+  price: 89.99
+};
+let currentShoeCount = 8;
+let currentCoreCount = 8;
+let currentRoom = 'small';
 
 // New function to navigate to products page
 function viewAllProducts() {
