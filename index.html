@@ -297,46 +297,93 @@
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section id="features" class="features-section">
+  <!-- Updated Features Section with Interactive Links -->
+<section class="features-section section" id="features">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Why Choose FlexCore?</h2>
-        <p class="section-subtitle">Revolutionary features that transform your footwear experience</p>
-      </div>
-      
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M12 2L2 7v10c0 5.55 3.84 10 9 11 1.16-1 9-5.45 9-11V7l-10-5z"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Modular Innovation</h3>
-          <p class="feature-description">
-            Revolutionary interchangeable system lets you switch between cores in seconds. 
-            One shoe base, unlimited possibilities.
-          </p>
-          <div class="feature-link">
-            <a href="#" class="link-with-arrow">Learn more about modularity</a>
-          </div>
+        <div class="section-header fade-in">
+            <h2 class="section-title">Why Choose FlexCore?</h2>
+            <p class="section-subtitle">
+                Discover the revolutionary features that make FlexCore the ultimate footwear solution
+            </p>
         </div>
+        
+        <div class="features-grid">
+            <a href="instant-transform.html" class="feature-card fade-in" data-link="instant-transform">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Instant Transform</h3>
+                <p class="feature-description">
+                    Switch between different shoe styles in under 30 seconds. From running shoes to formal wear instantly.
+                </p>
+            </a>
+            
+            <a href="cost-effective.html" class="feature-card fade-in" data-link="cost-effective">
+                <div class="feature-icon">💰</div>
+                <h3 class="feature-title">Cost-Effective</h3>
+                <p class="feature-description">
+                    Save hundreds of dollars by replacing multiple shoes with one adaptable system. Calculate your savings now.
+                </p>
+            </a>
+            
+            <a href="space-saving.html" class="feature-card fade-in" data-link="space-saving">
+                <div class="feature-icon">🏠</div>
+                <h3 class="feature-title">Space-Saving</h3>
+                <p class="feature-description">
+                    Reduce your shoe collection by 80%. One base shoe plus compact cores replaces your entire closet.
+                </p>
+            </a>
+            
+            <a href="eco-friendly.html" class="feature-card fade-in" data-link="eco-friendly">
+                <div class="feature-icon">🌱</div>
+                <h3 class="feature-title">Eco-Friendly</h3>
+                <p class="feature-description">
+                    Reduce waste and carbon footprint. Learn about our sustainable materials and environmental impact.
+                </p>
+            </a>
+            
+            <a href="premium-comfort.html" class="feature-card fade-in" data-link="premium-comfort">
+                <div class="feature-icon">☁️</div>
+                <h3 class="feature-title">Premium Comfort</h3>
+                <p class="feature-description">
+                    Advanced cushioning and ergonomic design. Experience our comfort technology and customization options.
+                </p>
+            </a>
+            
+            <a href="universal-compatibility.html" class="feature-card fade-in" data-link="universal-compatibility">
+                <div class="feature-icon">🔧</div>
+                <h3 class="feature-title">Universal Compatibility</h3>
+                <p class="feature-description">
+                    All cores work with any FlexCore base shoe. Explore our complete ecosystem and mixing possibilities.
+                </p>
+            </a>
+        </div>
+    </div>
+</section>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Peak Performance</h3>
-          <p class="feature-description">
-            Each core is engineered for specific activities - from marathon running to street skating, 
-            we've got your feet covered.
-          </p>
-          <div class="feature-link">
-            <a href="#" class="link-with-arrow">Explore performance specs</a>
-          </div>
-        </div>
+<!-- JavaScript to track feature clicks -->
+<script>
+function trackFeatureClick(featureName) {
+    // Track analytics event
+    console.log('Feature clicked:', featureName);
+    
+    // In a real implementation, send to analytics
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'feature_click', {
+            feature_name: featureName,
+            event_category: 'features'
+        });
+    }
+}
+
+// Add click tracking to feature cards
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.feature-card[data-link]').forEach(card => {
+        card.addEventListener('click', function(e) {
+            const featureName = this.getAttribute('data-link');
+            trackFeatureClick(featureName);
+        });
+    });
+});
+</script>
 
         <div class="feature-card">
           <div class="feature-icon">
