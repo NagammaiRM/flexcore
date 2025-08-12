@@ -97,10 +97,12 @@ function handleLoading() {
 }
 
 function hideLoadingScreen() {
-    if (loadingScreen && !loadingScreen.classList.contains('hidden')) {
+    if (loadingScreen) {
         loadingScreen.classList.add('hidden');
+        // Completely remove it from the flow
         setTimeout(() => {
             loadingScreen.style.display = 'none';
+            loadingScreen.remove(); // optional: removes element entirely
         }, 500);
     }
 }
