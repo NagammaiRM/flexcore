@@ -317,6 +317,48 @@ function viewProduct(productId) {
     }
 }
 
+function initializeGlobe() {
+  if (isGlobeInitialized) return;
+  
+  const canvas = document.getElementById('globe-canvas');
+  if (!canvas || typeof THREE === 'undefined') {
+    console.log('Three.js not loaded or canvas not found, skipping globe initialization');
+    return;
+  }
+
+  try {
+    // Create scene, camera, and renderer
+    globeScene = new THREE.Scene();
+    globeCamera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    globeRenderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+    globeRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    globeRenderer.setClearColor(0x000011, 1);
+
+    // Rest of your globe code stays the same...
+    // (keep all the existing globe initialization code)
+    
+    isGlobeInitialized = true;
+  } catch (error) {
+    console.error('Globe initialization failed:', error);
+  }
+}
+
+function initializeEverything() {
+  setupNavigation();
+  setupScrollEffects();
+  setupProductFilters();
+  
+  // Try to initialize globe, but don't let it block other functionality
+  try {
+    initializeGlobe();
+  } catch (error) {
+    console.warn('Globe failed to initialize:', error);
+  }
+  
+  updateSpaceOrganizer();
+  startAnimations();
+}
+
 // New function to navigate to products page
 function viewAllProducts() {
     // Track the click
