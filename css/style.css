@@ -176,6 +176,7 @@ a:hover {
 .loading-screen.hidden {
   opacity: 0;
   visibility: hidden;
+  pointer-events: none; /* allow clicks to pass through */
 }
 
 .loading-content {
