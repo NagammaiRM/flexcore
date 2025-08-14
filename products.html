@@ -3,419 +3,818 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Products - FlexCore</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Products - FlexCore</title>
+    <meta name="description" content="Explore FlexCore's complete collection of modular footwear - base shoes, cores, and starter kits.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
     <style>
-        .products-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 8rem 0 4rem;
-            text-align: center;
-            color: white;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        .products-hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #64748b;
+            --accent-color: #f59e0b;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --border-color: #e2e8f0;
+            --shadow-light: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-heavy: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        .products-hero p {
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: var(--light-color);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-icon {
+            position: relative;
+            color: var(--dark-color);
             font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cart-icon:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--danger-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero Section */
+        .products-hero {
+            padding: 120px 0 60px;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
             opacity: 0.9;
             max-width: 600px;
             margin: 0 auto;
         }
-        
-        .products-main {
-            padding: 6rem 0;
+
+        /* Products Section */
+        .products-section {
+            padding: 80px 0;
         }
-        
-        .products-expanded-grid {
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .product-filters {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .breadcrumb {
-            padding: 2rem 0 1rem;
-            color: var(--text-secondary);
-        }
-        
-        .breadcrumb a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-        
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-        
-        .product-category-section {
             margin-bottom: 4rem;
         }
-        
-        .category-title {
-            font-size: 2rem;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--primary);
-            display: inline-block;
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid var(--border-color);
         }
-        
-        .category-description {
-            color: var(--text-secondary);
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .product-badge.bestseller {
+            background: var(--success-color);
+        }
+
+        .product-badge.new {
+            background: var(--primary-color);
+        }
+
+        .product-image {
+            height: 250px;
+            background: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-category {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .product-description {
+            color: var(--secondary-color);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .price-original {
+            text-decoration: line-through;
+            color: var(--secondary-color);
+            font-size: 1rem;
+            margin-left: 0.5rem;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-features li {
+            padding: 0.25rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        .product-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Featured Products Section */
+        .featured-section {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
             margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-light {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+        }
+
+        .btn-light:hover {
+            background: var(--light-color);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 2000;
+        }
+
+        .product-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 16px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            display: none;
+            z-index: 2001;
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .modal-header {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--secondary-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--light-color);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-product {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .modal-image {
+            text-align: center;
+        }
+
+        .modal-image img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 12px;
+        }
+
+        .modal-info h3 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-price {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-description {
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .modal-features h4 {
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .modal-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-features li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .modal-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .modal-actions {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 1.1rem;
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--success-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-medium);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 3000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .modal-product {
+                grid-template-columns: 1fr;
+            }
+
+            .product-actions {
+                flex-direction: column;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .product-info {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loading-screen" class="loading-screen">
-        <div class="loading-content">
-            <div class="loading-logo">
-                <img src="https://i.imgur.com/rQJ8wvO.png" alt="FlexCore">
-            </div>
-            <div class="loading-spinner"></div>
-            <p class="loading-text">Loading Products...</p>
-        </div>
-    </div>
-
     <!-- Navigation -->
-    <nav id="navbar" class="navbar">
-        <div class="container">
-            <div class="nav-container">
-                <div class="nav-brand">
-                    <img src="https://i.imgur.com/rQJ8wvO.png" alt="FlexCore Logo" class="nav-logo">
-                    <span class="nav-title">FlexCore</span>
-                </div>
-                
-                <div class="nav-menu" id="nav-menu">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <a href="#" class="nav-link active">Products</a>
-                    <a href="index.html#features" class="nav-link">Features</a>
-                    <a href="index.html#support" class="nav-link">Support</a>
-                </div>
-                
-                <div class="nav-actions">
-                    <button class="cart-btn" onclick="toggleCart()">
-                        🛒 <span class="cart-badge">0</span>
-                    </button>
-                    <button class="nav-toggle" id="nav-toggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">FlexCore</a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="products.html" class="nav-link" style="color: var(--primary-color);">Products</a></li>
+                <li><a href="cost-effective.html" class="nav-link">Cost Calculator</a></li>
+                <li><a href="space-saving.html" class="nav-link">Space Saving</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="cart-icon" onclick="openCheckout()">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count" class="cart-count">0</span>
             </div>
         </div>
     </nav>
 
-    <!-- Products Hero -->
+    <!-- Hero Section -->
     <section class="products-hero">
         <div class="container">
-            <h1>All Products</h1>
-            <p>Discover our complete collection of FlexCore shoes and accessories. From foundation shoes to specialized cores, find everything you need for the perfect fit.</p>
+            <h1 class="hero-title">FlexCore Products</h1>
+            <p class="hero-subtitle">Discover our complete collection of modular footwear solutions - from base shoes to specialized cores for every activity.</p>
         </div>
     </section>
 
-    <!-- Breadcrumb -->
-    <div class="container">
-        <div class="breadcrumb">
-            <a href="index.html">Home</a> > <span>All Products</span>
-        </div>
-    </div>
-
-    <!-- Products Main -->
-    <section class="products-main">
+    <!-- Products Section -->
+    <section class="products-section">
         <div class="container">
-            
-            <!-- Foundation Shoes Category -->
-            <div class="product-category-section">
-                <h2 class="category-title">Foundation Shoes</h2>
-                <p class="category-description">The base of your FlexCore system. These shoes provide the foundation for all your core attachments.</p>
-                
-                <div class="products-expanded-grid">
-                    <div class="product-card" data-category="foundation">
-                        <div class="product-image">
-                            <img src="https://i.imgur.com/GuSEaVq.png" alt="Basic Bare">
-                        </div>
-                        <div class="product-content">
-                            <h3 class="product-title">Basic Bare</h3>
-                            <p class="product-description">The foundation of your FlexCore system with premium comfort.</p>
-                            <div class="product-price">
-                                <span class="price-current">$59.99</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn btn-secondary btn-product" onclick="viewProduct('basic-bare')">View Details</button>
-                                <button class="btn btn-primary btn-product" onclick="addToCart('basic-bare')">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
+            <div class="section-header">
+                <h2 class="section-title">Complete Product Collection</h2>
+            </div>
 
-                    <div class="product-card" data-category="foundation">
-                        <div class="product-image">
-                            <img src="https://i.imgur.com/GuSEaVq.png" alt="Basic Bare Pro">
-                        </div>
-                        <div class="product-content">
-                            <h3 class="product-title">Basic Bare Pro</h3>
-                            <p class="product-description">Enhanced version with premium leather and advanced cushioning.</p>
-                            <div class="product-price">
-                                <span class="price-current">$79.99</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn btn-secondary btn-product" onclick="viewProduct('basic-bare-pro')">View Details</button>
-                                <button class="btn btn-primary btn-product" onclick="addToCart('basic-bare-pro')">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
+            <div class="product-filters">
+                <button class="filter-btn active" data-filter="all">All Products</button>
+                <button class="filter-btn" data-filter="bases">Base Shoes</button>
+                <button class="filter-btn" data-filter="cores">Cores</button>
+                <button class="filter-btn" data-filter="kits">Starter Kits</button>
+            </div>
 
-                    <div class="product-card" data-category="foundation">
-                        <div class="product-image">
-                            <img src="https://i.imgur.com/GuSEaVq.png" alt="Basic Bare Elite">
-                        </div>
-                        <div class="product-content">
-                            <h3 class="product-title">Basic Bare Elite</h3>
-                            <p class="product-description">Top-tier foundation with carbon fiber reinforcement.</p>
-                            <div class="product-price">
-                                <span class="price-current">$99.99</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn btn-secondary btn-product" onclick="viewProduct('basic-bare-elite')">View Details</button>
-                                <button class="btn btn-primary btn-product" onclick="addToCart('basic-bare-elite')">Add to Cart</button>
-                            </div>
+            <div class="products-grid">
+                <!-- Basic Bare -->
+                <div class="product-card" data-category="bases">
+                    <div class="product-badge bestseller">Bestseller</div>
+                    <div class="product-image">
+                        <img src="https://i.imgur.com/GuSEaVq.png" alt="Basic Bare">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Base Shoe</div>
+                        <h3 class="product-name">Basic Bare</h3>
+                        <p class="product-description">The foundation of your FlexCore system. Premium synthetic upper with cushioned insole for all-day comfort.</p>
+                        <div class="product-price">$59.99</div>
+                        <ul class="product-features">
+                            <li>Premium synthetic upper</li>
+                            <li>Cushioned insole</li>
+                            <li>Available in 6 colors</li>
+                            <li>Lace-up or slip-on</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button onclick="addToCart('basic-bare')" class="btn btn-primary">
+                                <i class="fas fa-cart-plus"></i>
+                                Add to Cart
+                            </button>
+                            <button onclick="viewProduct('basic-bare')" class="btn btn-secondary">
+                                View Details
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Activity Cores Category -->
-            <div class="product-category-section">
-                <h2 class="category-title">Activity Cores</h2>
-                <p class="category-description">Specialized cores designed for specific activities and sports.</p>
-                
-                <div class="products-expanded-grid">
-                    <div class="product-card" data-category="cores">
-                        <div class="product-image">
-                            <img src="https://i.imgur.com/MfhviPW.png" alt="Casual Cores">
-                        </div>
-                        <div class="product-content">
-                            <h3 class="product-title">Casual Cores</h3>
-                            <p class="product-description">Perfect for everyday wear and casual activities.</p>
-                            <div class="product-price">
-                                <span class="price-current">$19.99</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn btn-secondary btn-product" onclick="viewProduct('casual-cores')">View Details</button>
-                                <button class="btn btn-primary btn-product" onclick="addToCart('casual-cores')">Add to Cart</button>
-                            </div>
-                        </div>
+                <!-- Complete Starter Kit -->
+                <div class="product-card" data-category="kits">
+                    <div class="product-badge">Best Value</div>
+                    <div class="product-image">
+                        <img src="https://i.imgur.com/myAyR8N.png" alt="Complete Starter Kit">
                     </div>
-
-                    <div class="product-card" data-category="cores">
-                        <div class="product-image">
-                            <img src="https://i.imgur.com/kyuImHk.png" alt="Running Cores">
-                        </div>
-                        <div class="product-content">
-                            <h3 class="product-title">Performance Running Cores</h3>
-                            <p class="product-description">Lightweight cores optimized for running and cardio.</p>
-                            <div class="product-price">
-                                <span class="price-current">$19.99</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn btn-secondary btn-product" onclick="viewProduct('running-cores')">View Details</button>
-                                <button class="btn btn-primary btn-product" onclick="addToCart('running-cores')">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-card" data-category="cores">
-                        <div class="product-image">
-                            <img src="http://i.imgur.com/KmfodAU.png" alt="Cleat Cores">
-                        </div>
-                        <div class="product-content">
-                            <h3 class="product-title">Professional Cleat Cores</h3>
-                            <p class="product-description">High-performance cores for professional sports.</p>
-                            <div class="product-price">
-                                <span class="price-current">$19.99</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn btn-secondary btn-product" onclick="viewProduct('cleat-cores')">View Details</button>
-                                <button class="btn btn-primary btn-product" onclick="addToCart('cleat-cores')">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-card" data-category="cores">
-                        <div class="product-image">
-                            <img src="https://i.imgur.com/MuvrLOV.png" alt="Roller Cores">
-                        </div>
-                        <div class="product-content">
-                            <h3 class="product-title">Roller Cores</h3>
-                            <p class="product-description">Transform your shoes into roller skates instantly.</p>
-                            <div class="product-price">
-                                <span class="price-current">$19.99</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn btn-secondary btn-product" onclick="viewProduct('roller-cores')">View Details</button>
-                                <button class="btn btn-primary btn-product" onclick="addToCart('roller-cores')">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-card" data-category="cores">
-                        <div class="product-image">
-                            <img src="https://i.imgur.com/kyuImHk.png" alt="Basketball Cores">
-                        </div>
-                        <div class="product-content">
-                            <h3 class="product-title">Basketball Cores</h3>
-                            <p class="product-description">High-top cores with ankle support for basketball.</p>
-                            <div class="product-price">
-                                <span class="price-current">$24.99</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn btn-secondary btn-product" onclick="viewProduct('basketball-cores')">View Details</button>
-                                <button class="btn btn-primary btn-product" onclick="addToCart('basketball-cores')">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-card" data-category="cores">
-                        <div class="product-image">
-                            <img src="https://i.imgur.com/MfhviPW.png" alt="Hiking Cores">
-                        </div>
-                        <div class="product-content">
-                            <h3 class="product-title">All-Terrain Hiking Cores</h3>
-                            <p class="product-description">Rugged cores with superior grip for outdoor adventures.</p>
-                            <div class="product-price">
-                                <span class="price-current">$29.99</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn btn-secondary btn-product" onclick="viewProduct('hiking-cores')">View Details</button>
-                                <button class="btn btn-primary btn-product" onclick="addToCart('hiking-cores')">Add to Cart</button>
-                            </div>
+                    <div class="product-info">
+                        <div class="product-category">Starter Kit</div>
+                        <h3 class="product-name">Complete Starter Kit</h3>
+                        <p class="product-description">Perfect for newcomers! Includes Basic Bare plus your choice of 2 cores with carrying case.</p>
+                        <div class="product-price">$94.99 <span class="price-original">$109.97</span></div>
+                        <ul class="product-features">
+                            <li>1x Basic Bare shoe</li>
+                            <li>Choice of 2 cores</li>
+                            <li>Carrying case included</li>
+                            <li>Setup guide</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button onclick="addToCart('starter-kit')" class="btn btn-primary">
+                                <i class="fas fa-cart-plus"></i>
+                                Add to Cart
+                            </button>
+                            <button onclick="viewProduct('starter-kit')" class="btn btn-secondary">
+                                View Details
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Bundles & Kits Category -->
-            <div class="product-category-section">
-                <h2 class="category-title">Bundles & Starter Kits</h2>
-                <p class="category-description">Complete sets and bundles for the best value and convenience.</p>
-                
-                <div class="products-expanded-grid">
-                    <div class="product-card" data-category="bundles">
-                        <div class="product-image">
-                            <img src="https://i.imgur.com/myAyR8N.png" alt="Starter Kit">
-                        </div>
-                        <div class="product-content">
-                            <h3 class="product-title">Complete Starter Kit</h3>
-                            <p class="product-description">Everything you need to get started with FlexCore.</p>
-                            <div class="product-price">
-                                <span class="price-current">$94.99</span>
-                                <span class="price-original">$109.97</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn btn-secondary btn-product" onclick="viewProduct('starter-kit')">View Details</button>
-                                <button class="btn btn-primary btn-product" onclick="addToCart('starter-kit')">Add to Cart</button>
-                            </div>
-                        </div>
+                <!-- Casual Cores -->
+                <div class="product-card" data-category="cores">
+                    <div class="product-image">
+                        <img src="https://i.imgur.com/MfhviPW.png" alt="Casual Cores">
                     </div>
-
-                    <div class="product-card" data-category="bundles">
-                        <div class="product-image">
-                            <img src="https://i.imgur.com/myAyR8N.png" alt="Sports Bundle">
-                        </div>
-                        <div class="product-content">
-                            <h3 class="product-title">Ultimate Sports Bundle</h3>
-                            <p class="product-description">Basic Bare + 5 sports cores for the active lifestyle.</p>
-                            <div class="product-price">
-                                <span class="price-current">$139.99</span>
-                                <span class="price-original">$159.94</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn btn-secondary btn-product" onclick="viewProduct('sports-bundle')">View Details</button>
-                                <button class="btn btn-primary btn-product" onclick="addToCart('sports-bundle')">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-card" data-category="bundles">
-                        <div class="product-image">
-                            <img src="https://i.imgur.com/myAyR8N.png" alt="Family Pack">
-                        </div>
-                        <div class="product-content">
-                            <h3 class="product-title">Family Pack</h3>
-                            <p class="product-description">2 Basic Bare shoes + 4 core sets for the whole family.</p>
-                            <div class="product-price">
-                                <span class="price-current">$199.99</span>
-                                <span class="price-original">$239.92</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn btn-secondary btn-product" onclick="viewProduct('family-pack')">View Details</button>
-                                <button class="btn btn-primary btn-product" onclick="addToCart('family-pack')">Add to Cart</button>
-                            </div>
+                    <div class="product-info">
+                        <div class="product-category">Core</div>
+                        <h3 class="product-name">Casual Cores</h3>
+                        <p class="product-description">Perfect for everyday comfort. Memory foam cushioning with breathable design for all-day wear.</p>
+                        <div class="product-price">$19.99</div>
+                        <ul class="product-features">
+                            <li>Memory foam cushioning</li>
+                            <li>Breathable design</li>
+                            <li>All-day comfort</li>
+                            <li>Slip-resistant</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button onclick="addToCart('casual-cores')" class="btn btn-primary">
+                                <i class="fas fa-cart-plus"></i>
+                                Add to Cart
+                            </button>
+                            <button onclick="viewProduct('casual-cores')" class="btn btn-secondary">
+                                View Details
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Accessories Category -->
-            <div class="product-category-section">
-                <h2 class="category-title">Accessories</h2>
-                <p class="category-description">Essential accessories to enhance your FlexCore experience.</p>
-                
-                <div class="products-expanded-grid">
-                    <div class="product-card" data-category="accessories">
-                        <div class="product-image">
-                            <img src="https://i.imgur.com/rQJ8wvO.png" alt="Carrying Case">
-                        </div>
-                        <div class="product-content">
-                            <h3 class="product-title">Premium Carrying Case</h3>
-                            <p class="product-description">Organize and transport your cores in style.</p>
-                            <div class="product-price">
-                                <span class="price-current">$24.99</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn btn-secondary btn-product" onclick="viewProduct('carrying-case')">View Details</button>
-                                <button class="btn btn-primary btn-product" onclick="addToCart('carrying-case')">Add to Cart</button>
-                            </div>
+                <!-- Professional Cleat Cores -->
+                <div class="product-card" data-category="cores">
+                    <div class="product-badge new">New</div>
+                    <div class="product-image">
+                        <img src="http://i.imgur.com/KmfodAU.png" alt="Professional Cleat Cores">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Core</div>
+                        <h3 class="product-name">Professional Cleat Cores</h3>
+                        <p class="product-description">Elite performance for serious athletes. Advanced cleat technology for superior traction.</p>
+                        <div class="product-price">$19.99</div>
+                        <ul class="product-features">
+                            <li>Professional-grade cleats</li>
+                            <li>Enhanced traction</li>
+                            <li>Lightweight design</li>
+                            <li>Multi-sport compatible</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button onclick="addToCart('cleat-cores')" class="btn btn-primary">
+                                <i class="fas fa-cart-plus"></i>
+                                Add to Cart
+                            </button>
+                            <button onclick="viewProduct('cleat-cores')" class="btn btn-secondary">
+                                View Details
+                            </button>
                         </div>
                     </div>
+                </div>
 
-                    <div class="product-card" data-category="accessories">
-                        <div class="product-image">
-                            <img src="https://i.imgur.com/rQJ8wvO.png" alt="Cleaning Kit">
-                        </div>
-                        <div class="product-content">
-                            <h3 class="product-title">Care & Cleaning Kit</h3>
-                            <p class="product-description">Keep your FlexCore system in perfect condition.</p>
-                            <div class="product-price">
-                                <span class="price-current">$14.99</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn btn-secondary btn-product" onclick="viewProduct('cleaning-kit')">View Details</button>
-                                <button class="btn btn-primary btn-product" onclick="addToCart('cleaning-kit')">Add to Cart</button>
-                            </div>
+                <!-- Roller Cores -->
+                <div class="product-card" data-category="cores">
+                    <div class="product-image">
+                        <img src="https://i.imgur.com/MuvrLOV.png" alt="Roller Cores">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Core</div>
+                        <h3 class="product-name">Roller Cores</h3>
+                        <p class="product-description">Transform your shoes into smooth urban transportation. High-quality bearings for effortless rolling.</p>
+                        <div class="product-price">$19.99</div>
+                        <ul class="product-features">
+                            <li>High-quality bearings</li>
+                            <li>Smooth rolling wheels</li>
+                            <li>Adjustable settings</li>
+                            <li>Urban mobility</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button onclick="addToCart('roller-cores')" class="btn btn-primary">
+                                <i class="fas fa-cart-plus"></i>
+                                Add to Cart
+                            </button>
+                            <button onclick="viewProduct('roller-cores')" class="btn btn-secondary">
+                                View Details
+                            </button>
                         </div>
                     </div>
+                </div>
 
-                    <div class="product-card" data-category="accessories">
-                        <div class="product-image">
-                            <img src="https://i.imgur.com/rQJ8wvO.png" alt="Replacement Parts">
-                        </div>
-                        <div class="product-content">
-                            <h3 class="product-title">Replacement Parts Kit</h3>
-                            <p class="product-description">Essential replacement parts and fasteners.</p>
-                            <div class="product-price">
-                                <span class="price-current">$9.99</span>
-                            </div>
-                            <div class="product-actions">
-                                <button class="btn btn-secondary btn-product" onclick="viewProduct('replacement-parts')">View Details</button>
-                                <button class="btn btn-primary btn-product" onclick="addToCart('replacement-parts')">Add to Cart</button>
-                            </div>
+                <!-- Performance Running Cores -->
+                <div class="product-card" data-category="cores">
+                    <div class="product-image">
+                        <img src="https://i.imgur.com/kyuImHk.png" alt="Performance Running Cores">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Core</div>
+                        <h3 class="product-name">Performance Running Cores</h3>
+                        <p class="product-description">Engineered for serious runners. Advanced cushioning with energy return technology.</p>
+                        <div class="product-price">$19.99</div>
+                        <ul class="product-features">
+                            <li>Advanced cushioning</li>
+                            <li>Energy return technology</li>
+                            <li>Lightweight materials</li>
+                            <li>Performance optimized</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button onclick="addToCart('running-cores')" class="btn btn-primary">
+                                <i class="fas fa-cart-plus"></i>
+                                Add to Cart
+                            </button>
+                            <button onclick="viewProduct('running-cores')" class="btn btn-secondary">
+                                View Details
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -423,67 +822,153 @@
         </div>
     </section>
 
-    <!-- Cart Sidebar -->
-    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
-    <div class="cart-sidebar" id="cart-sidebar">
-        <div class="cart-header">
-            <h3>Shopping Cart</h3>
-            <button class="cart-close" onclick="toggleCart()">✕</button>
-        </div>
-        <div class="cart-body">
-            <div class="cart-items" id="cart-items"></div>
-        </div>
-        <div class="cart-footer" id="cart-footer">
-            <div class="cart-summary">
-                <div class="cart-subtotal">
-                    Subtotal: $<span id="cart-subtotal">0.00</span>
-                </div>
-                <div class="cart-total">
-                    Total: $<span id="cart-total">0.00</span>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Transform Your Footwear?</h2>
+                <p class="cta-subtitle">Join thousands of satisfied customers who've revolutionized their shoe collection with FlexCore's modular system.</p>
+                <div class="cta-buttons">
+                    <button onclick="window.location.href='cost-effective.html'" class="btn btn-light">
+                        <i class="fas fa-calculator"></i>
+                        Calculate Your Savings
+                    </button>
+                    <button onclick="window.location.href='space-saving.html'" class="btn btn-outline">
+                        <i class="fas fa-home"></i>
+                        Space Saving Calculator
+                    </button>
                 </div>
             </div>
-            <button class="btn btn-primary btn-large cart-checkout" onclick="proceedToCheckout()">
-                Checkout
-            </button>
         </div>
-    </div>
+    </section>
 
     <!-- Product Modal -->
-    <div class="modal-overlay" id="modal-overlay" onclick="closeProductModal()"></div>
-    <div class="product-modal" id="product-modal">
+    <div id="modal-overlay" class="modal-overlay" onclick="closeProductModal()"></div>
+    <div id="product-modal" class="product-modal">
         <div class="modal-header">
-            <h3 id="modal-title"></h3>
-            <button class="modal-close" onclick="closeProductModal()">✕</button>
+            <h3 id="modal-title">Product Title</h3>
+            <button class="modal-close" onclick="closeProductModal()">×</button>
         </div>
-        <div class="modal-body" id="modal-body"></div>
-    </div>
-
-    <!-- Back to Top -->
-    <button id="back-to-top" class="back-to-top" onclick="smoothScrollTo('body')">
-        ↑
-    </button>
-
-    <!-- Chatbot -->
-    <div class="chatbot-container" id="chatbot-container">
-        <div class="chatbot-header">
-            <h4>FlexCore Assistant</h4>
-            <button class="chatbot-minimize" onclick="toggleChatbot()">−</button>
-        </div>
-        <div class="chatbot-body" id="chatbot-body">
-            <div class="chatbot-message bot">
-                <p>Hi! I'm here to help you find the perfect FlexCore products. What are you looking for today?</p>
-            </div>
-        </div>
-        <div class="chatbot-input">
-            <input type="text" placeholder="Type your message..." id="chatbot-input">
-            <button onclick="sendChatMessage()">Send</button>
+        <div id="modal-body" class="modal-body">
+            <!-- Product details will be inserted here -->
         </div>
     </div>
-    
-    <button class="chatbot-toggle" id="chatbot-toggle" onclick="toggleChatbot()">
-        💬
-    </button>
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <!-- JavaScript -->
+    <script>
+        let cart = JSON.parse(localStorage.getItem('flexcore_cart')) || [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartUI();
+            setupProductFilters();
+        });
+
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            if (cartCount) {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCount.textContent = totalItems;
+            }
+        }
+
+        function setupProductFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const productCards = document.querySelectorAll('.product-card');
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const filter = btn.dataset.filter;
+                    
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    productCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+
+        function addToCart(productId) {
+            const products = {
+                'basic-bare': { id: 'basic-bare', name: 'Basic Bare', price: 59.99, image: 'https://i.imgur.com/GuSEaVq.png' },
+                'starter-kit': { id: 'starter-kit', name: 'Complete Starter Kit', price: 94.99, image: 'https://i.imgur.com/myAyR8N.png' },
+                'casual-cores': { id: 'casual-cores', name: 'Casual Cores', price: 19.99, image: 'https://i.imgur.com/MfhviPW.png' },
+                'cleat-cores': { id: 'cleat-cores', name: 'Professional Cleat Cores', price: 19.99, image: 'http://i.imgur.com/KmfodAU.png' },
+                'roller-cores': { id: 'roller-cores', name: 'Roller Cores', price: 19.99, image: 'https://i.imgur.com/MuvrLOV.png' },
+                'running-cores': { id: 'running-cores', name: 'Performance Running Cores', price: 19.99, image: 'https://i.imgur.com/kyuImHk.png' }
+            };
+            
+            const product = products[productId];
+            if (!product) return;
+            
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            
+            localStorage.setItem('flexcore_cart', JSON.stringify(cart));
+            updateCartUI();
+            showNotification(`${product.name} added to cart!`);
+        }
+
+        function viewProduct(productId) {
+            const products = {
+                'basic-bare': {
+                    name: 'Basic Bare',
+                    price: 59.99,
+                    image: 'https://i.imgur.com/GuSEaVq.png',
+                    description: 'The foundation of your FlexCore system. This minimalist base shoe is crafted with premium materials and designed for maximum comfort. Available in both lace-up and slip-on styles.',
+                    features: ['Premium synthetic upper', 'Cushioned insole', 'Flexible construction', 'Available in 6 colors', 'Lace-up or slip-on options']
+                },
+                'starter-kit': {
+                    name: 'Complete Starter Kit',
+                    price: 94.99,
+                    originalPrice: 109.97,
+                    image: 'https://i.imgur.com/myAyR8N.png',
+                    description: 'Perfect for newcomers to the FlexCore ecosystem! This comprehensive kit includes our Basic Bare foundation plus your choice of any 2 cores from our collection.',
+                    features: ['1x Basic Bare shoe', 'Your choice of 2 cores', 'Carrying case included', 'Setup guide', 'Best value option']
+                }
+            };
+            
+            const product = products[productId] || {
+                name: 'FlexCore Product',
+                price: 19.99,
+                image: 'https://i.imgur.com/MfhviPW.png',
+                description: 'High-quality FlexCore component designed for optimal performance and comfort.',
+                features: ['Premium materials', 'Easy installation', 'Durable construction', 'Compatible with all bases']
+            };
+            
+            const modal = document.getElementById('product-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            const modalOverlay = document.getElementById('modal-overlay');
+            
+            if (modal && modalTitle && modalBody) {
+                modalTitle.textContent = product.name;
+                modalBody.innerHTML = `
+                    <div class="modal-product">
+                        <div class="modal-image">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                        <div class="modal-info">
+                            <div class="modal-price">
+                                <span>${product.price.toFixed(2)}</span>
+                                ${product.originalPrice ? `<span class="price-original">${product.originalPrice.toFixed(2)}</span>` : ''}
+                            </div>
+                            <p class="modal-description">${product.description}</p>
+                            <div class="modal-features">
+                                <h4>Key Features:</h4>
+                                <ul>
+                                    ${product.features.map(feature => `<li>${feature}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="modal-actions">
+                                <button class="btn btn-primary btn-large" onclick="addToCart('${productId}'); closeProductModal();">
+                                    <i class="
