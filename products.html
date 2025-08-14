@@ -971,4 +971,48 @@
                             </div>
                             <div class="modal-actions">
                                 <button class="btn btn-primary btn-large" onclick="addToCart('${productId}'); closeProductModal();">
-                                    <i class="
+                                    <i class="fas fa-cart-plus"></i>
+                                    Add to Cart
+                                </button>
+                                <button class="btn btn-secondary btn-large" onclick="closeProductModal()">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                modal.style.display = 'block';
+                modalOverlay.style.display = 'block';
+            }
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('product-modal');
+            const modalOverlay = document.getElementById('modal-overlay');
+            if (modal) modal.style.display = 'none';
+            if (modalOverlay) modalOverlay.style.display = 'none';
+        }
+
+        function showNotification(message) {
+            let notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 50);
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        function openCheckout() {
+            // Redirect to checkout page (replace with your checkout page link)
+            window.location.href = 'checkout.html';
+        }
+    </script>
+</body>
+</html>
