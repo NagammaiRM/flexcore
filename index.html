@@ -783,7 +783,302 @@
             transform: translateX(0);
         }
 
-        /* Back to Top */
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 350px;
+            max-height: 500px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-heavy);
+            z-index: 2000;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .chatbot-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .chatbot-avatar {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .chatbot-info {
+            flex: 1;
+        }
+
+        .chatbot-name {
+            display: block;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .chatbot-status {
+            display: block;
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .chatbot-toggle {
+            transition: var(--transition);
+        }
+
+        .chatbot-container.collapsed .chatbot-toggle {
+            transform: rotate(180deg);
+        }
+
+        .chatbot-body {
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+
+        .chatbot-container.collapsed .chatbot-body {
+            height: 0;
+            overflow: hidden;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: var(--light-color);
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .bot-message .message-content {
+            background: white;
+            color: var(--dark-color);
+            padding: 0.75rem 1rem;
+            border-radius: 18px 18px 18px 4px;
+            max-width: 80%;
+            box-shadow: var(--shadow-light);
+        }
+
+        .user-message {
+            justify-content: flex-end;
+        }
+
+        .user-message .message-content {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 18px 18px 4px 18px;
+            max-width: 80%;
+        }
+
+        .quick-actions {
+            margin-top: 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .quick-btn {
+            background: var(--light-color);
+            border: 1px solid var(--border-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quick-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+            background: white;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            margin-right: 0.5rem;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .chatbot-input input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .send-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .send-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 0;
+            background: var(--light-color);
+        }
+
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .testimonial {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            display: none;
+        }
+
+        .testimonial.active {
+            opacity: 1;
+            transform: translateY(0);
+            display: block;
+        }
+
+        .testimonial-content {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .author-info h4 {
+            color: var(--dark-color);
+            margin: 0;
+        }
+
+        .author-info p {
+            color: var(--secondary-color);
+            margin: 0.25rem 0 0 0;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .nav-btn {
+            background: var(--border-color);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 2rem auto 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-btn:hover {
+            background: var(--light-color);
+        }
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -932,13 +1227,15 @@
             <ul id="nav-menu" class="nav-menu">
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#features" class="nav-link">Features</a></li>
-                <li><a href="#products" class="nav-link">Products</a></li>
+                <li><a href="products.html" class="nav-link">Products</a></li>
                 <li><a href="#calculator" class="nav-link">Calculator</a></li>
+                <li><a href="cost-effective.html" class="nav-link">Cost Calculator</a></li>
+                <li><a href="space-saving.html" class="nav-link">Space Saving</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
 
             <div class="nav-actions">
-                <div class="cart-icon">
+                <div class="cart-icon" onclick="openCheckout()">
                     <i class="fas fa-shopping-cart"></i>
                     <span id="cart-count" class="cart-count">0</span>
                 </div>
@@ -960,14 +1257,14 @@
                 <h1 class="hero-title">Revolutionary Modular Footwear</h1>
                 <p class="hero-subtitle">Transform any shoe into the perfect tool for any activity with FlexCore's innovative modular sole technology.</p>
                 <div class="hero-cta">
-                    <button onclick="viewAllProducts()" class="btn btn-primary">
-                        <i class="fas fa-play"></i>
-                        Explore Products
+                    <button onclick="window.location.href='products.html'" class="btn btn-primary">
+                        <i class="fas fa-shopping-bag"></i>
+                        Shop Products
                     </button>
-                    <a href="#features" class="btn btn-secondary">
-                        <i class="fas fa-info-circle"></i>
-                        Learn More
-                    </a>
+                    <button onclick="window.location.href='cost-effective.html'" class="btn btn-secondary">
+                        <i class="fas fa-calculator"></i>
+                        Calculate Savings
+                    </button>
                 </div>
             </div>
             <div class="hero-visual">
@@ -1234,6 +1531,78 @@
         </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <p class="section-subtitle">Join thousands of satisfied customers who've transformed their footwear experience with FlexCore.</p>
+            </div>
+            
+            <div class="testimonial-container fade-in">
+                <div class="testimonial active">
+                    <div class="testimonial-content">
+                        "FlexCore completely changed how I think about shoes. Instead of having 15 pairs cluttering my closet, I have one base and 8 cores that handle everything from gym sessions to board meetings. It's genius!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div class="author-info">
+                            <h4>Jessica Davis</h4>
+                            <p>Marketing Executive</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        "As an athlete, I need different shoes for different sports. FlexCore lets me switch from running to basketball to casual in seconds. Plus, I've saved over $800 compared to buying separate shoes!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <h4>Michael Rodriguez</h4>
+                            <p>Professional Athlete</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        "The space-saving aspect alone sold me. My small apartment went from shoe chaos to organized bliss. The fact that they're comfortable and stylish is just a bonus!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SL</div>
+                        <div class="author-info">
+                            <h4>Sarah Liu</h4>
+                            <p>Urban Professional</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-nav">
+                    <button class="nav-btn" id="testimonial-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="nav-btn" id="testimonial-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated with FlexCore</h2>
+            <p>Get the latest news, product updates, and exclusive offers delivered to your inbox.</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="features" style="background: var(--light-color);">
         <div class="container">
@@ -1324,6 +1693,42 @@
         </div>
     </div>
 
+    <!-- Chatbot -->
+    <div id="chatbot-container" class="chatbot-container">
+        <div class="chatbot-header" onclick="toggleChatbot()">
+            <div class="chatbot-avatar">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="chatbot-info">
+                <span class="chatbot-name">FlexCore Assistant</span>
+                <span class="chatbot-status">Online</span>
+            </div>
+            <div class="chatbot-toggle">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+        <div class="chatbot-body" id="chatbot-body">
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        Hi! I'm your FlexCore assistant. How can I help you today?
+                        <div class="quick-actions">
+                            <button onclick="sendQuickMessage('Tell me about FlexCore')" class="quick-btn">About FlexCore</button>
+                            <button onclick="sendQuickMessage('Show me products')" class="quick-btn">Products</button>
+                            <button onclick="sendQuickMessage('Calculate savings')" class="quick-btn">Savings</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbot-message" placeholder="Type your message..." onkeypress="handleChatKeypress(event)">
+                <button onclick="sendMessage()" class="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Back to Top Button -->
     <button id="back-to-top" class="back-to-top">
         <i class="fas fa-arrow-up"></i>
@@ -1331,13 +1736,13 @@
 
     <!-- JavaScript -->
     <script>
-        // Include the fixed JavaScript from the previous artifact
         // Global Variables
         let cart = [];
         let currentTestimonial = 0;
         let isMenuOpen = false;
         let globe, globeRenderer, globeScene, globeCamera;
         let isGlobeInitialized = false;
+        let isChatbotCollapsed = true;
         let currentConfiguration = {
             room: 'small',
             shoes: 8,
@@ -1355,6 +1760,171 @@
         document.addEventListener('DOMContentLoaded', function() {
             initializeApp();
         });
+
+        function initializeApp() {
+            handleLoading();
+            setupNavigation();
+            setupScrollEffects();
+            setupAnimations();
+            setupProductFilters();
+            setupCart();
+            setupBackToTop();
+            setupCalculator();
+            setupTestimonials();
+            setupChatbot();
+            
+            try {
+                initializeGlobe();
+            } catch (error) {
+                console.warn('Globe failed to initialize:', error);
+            }
+            
+            updateSpaceOrganizer();
+            trackAnalytics();
+        }
+
+        // Chatbot Functions
+        function setupChatbot() {
+            const chatbotContainer = document.getElementById('chatbot-container');
+            if (chatbotContainer) {
+                chatbotContainer.classList.add('collapsed');
+            }
+        }
+
+        function toggleChatbot() {
+            const chatbotContainer = document.getElementById('chatbot-container');
+            const chatbotToggle = document.querySelector('.chatbot-toggle i');
+            
+            isChatbotCollapsed = !isChatbotCollapsed;
+            
+            if (isChatbotCollapsed) {
+                chatbotContainer.classList.add('collapsed');
+                chatbotToggle.className = 'fas fa-chevron-down';
+            } else {
+                chatbotContainer.classList.remove('collapsed');
+                chatbotToggle.className = 'fas fa-chevron-up';
+            }
+        }
+
+        function handleChatKeypress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatbot-message');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessageToChat(message, 'user');
+                input.value = '';
+                
+                // Simulate bot response
+                setTimeout(() => {
+                    const response = getChatbotResponse(message);
+                    addMessageToChat(response, 'bot');
+                }, 1000);
+            }
+        }
+
+        function sendQuickMessage(message) {
+            addMessageToChat(message, 'user');
+            setTimeout(() => {
+                const response = getChatbotResponse(message);
+                addMessageToChat(response, 'bot');
+            }, 1000);
+        }
+
+        function addMessageToChat(message, sender) {
+            const messagesContainer = document.getElementById('chatbot-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            
+            messageDiv.innerHTML = `
+                <div class="message-content">${message}</div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function getChatbotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('flexcore') || lowerMessage.includes('about')) {
+                return "FlexCore is revolutionary modular footwear! One base shoe, multiple cores for any activity. Would you like to see our products or calculate your savings?";
+            } else if (lowerMessage.includes('product') || lowerMessage.includes('shoe')) {
+                return "We have Base Shoes ($59.99) and various Cores ($19.99 each) including Casual, Running, Cleat, and Roller cores. <a href='products.html' style='color: #2563eb;'>View all products →</a>";
+            } else if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('saving')) {
+                return "FlexCore can save you hundreds! Try our <a href='cost-effective.html' style='color: #2563eb;'>Cost Calculator</a> to see your personalized savings.";
+            } else if (lowerMessage.includes('space') || lowerMessage.includes('storage')) {
+                return "Save up to 80% of your shoe storage space! Check out our <a href='space-saving.html' style='color: #2563eb;'>Space-Saving Calculator</a>.";
+            } else if (lowerMessage.includes('help') || lowerMessage.includes('support')) {
+                return "I'm here to help! You can ask me about products, pricing, savings, or how FlexCore works. What would you like to know?";
+            } else {
+                return "Great question! FlexCore makes shoe shopping simple and affordable. Would you like to explore our products, calculate savings, or learn more about the technology?";
+            }
+        }
+
+        // Testimonials Functions
+        function setupTestimonials() {
+            const testimonials = document.querySelectorAll('.testimonial');
+            const prevBtn = document.getElementById('testimonial-prev');
+            const nextBtn = document.getElementById('testimonial-next');
+
+            if (testimonials.length === 0) return;
+
+            function showTestimonial(index) {
+                testimonials.forEach((testimonial, i) => {
+                    testimonial.classList.toggle('active', i === index);
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                    showTestimonial(currentTestimonial);
+                });
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+                    showTestimonial(currentTestimonial);
+                });
+            }
+
+            // Auto-rotate testimonials
+            setInterval(() => {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(currentTestimonial);
+            }, 6000);
+        }
+
+        // Newsletter Function
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input').value;
+            
+            // Simulate subscription
+            showCartNotification('Successfully subscribed to FlexCore newsletter!');
+            event.target.reset();
+            
+            trackEvent('Newsletter', 'subscribe', email);
+        }
+
+        // Checkout Function
+        function openCheckout() {
+            if (cart.length === 0) {
+                showCartNotification('Your cart is empty! Add some products first.');
+                return;
+            }
+            
+            // Store cart data for checkout page
+            localStorage.setItem('flexcore_cart', JSON.stringify(cart));
+            window.location.href = 'checkout.html';
+        }
 
         function initializeApp() {
             handleLoading();
