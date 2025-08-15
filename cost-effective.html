@@ -4,17 +4,148 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cost-Effective Calculator - FlexCore</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Calculate how much money you can save with FlexCore's modular footwear system compared to buying traditional shoes.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #64748b;
+            --accent-color: #10b981;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --border-color: #e2e8f0;
+            --shadow-light: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-heavy: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --gradient-secondary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: var(--light-color);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-icon {
+            position: relative;
+            color: var(--dark-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cart-icon:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--danger-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero Section */
         .calculator-hero {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            padding: 8rem 0 4rem;
+            background: var(--gradient-primary);
+            padding: 120px 0 80px;
             text-align: center;
             color: white;
         }
-        
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Calculator Section */
         .calculator-section {
-            padding: 6rem 0;
+            padding: 80px 0;
         }
         
         .calculator-container {
@@ -26,31 +157,31 @@
         }
         
         .calculator-form {
-            background: var(--surface);
+            background: white;
             padding: 3rem;
-            border-radius: 1.5rem;
-            border: 1px solid var(--border);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 2rem;
+            text-align: center;
         }
         
         .form-group {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             font-weight: 600;
-            color: var(--text-primary);
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid var(--border);
-            border-radius: 0.5rem;
-            background: var(--background);
-            color: var(--text-primary);
-            font-size: 1rem;
+            color: var(--dark-color);
+            font-size: 1.1rem;
         }
         
         .slider-group {
@@ -59,34 +190,116 @@
         
         .slider {
             width: 100%;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--border-color);
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            border: none;
+            box-shadow: var(--shadow-medium);
         }
         
         .slider-value {
             text-align: center;
-            font-weight: 600;
-            color: var(--primary);
-            margin: 0.5rem 0;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 1rem 0;
+            font-size: 1.25rem;
+            background: var(--light-color);
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            background: var(--light-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .checkbox-item:hover {
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .checkbox-item input {
+            margin-right: 0.75rem;
+            width: 18px;
+            height: 18px;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
         }
         
         .results-panel {
-            background: var(--surface);
+            background: white;
             padding: 3rem;
-            border-radius: 1.5rem;
-            border: 1px solid var(--border);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
             position: sticky;
-            top: 2rem;
+            top: 100px;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .results-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 2rem;
+            text-align: center;
         }
         
         .savings-display {
             text-align: center;
             margin-bottom: 2rem;
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
         }
         
         .savings-amount {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--accent);
+            font-size: 3.5rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .savings-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
         
         .comparison-chart {
@@ -96,58 +309,94 @@
         .chart-bar {
             display: flex;
             align-items: center;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
         }
         
         .chart-label {
-            width: 120px;
+            width: 100px;
             font-size: 0.9rem;
             font-weight: 600;
+            color: var(--dark-color);
         }
         
         .chart-bar-bg {
             flex: 1;
-            height: 30px;
-            background: var(--border);
-            border-radius: 15px;
+            height: 40px;
+            background: var(--light-color);
+            border-radius: 20px;
             position: relative;
             margin: 0 1rem;
+            border: 2px solid var(--border-color);
+            overflow: hidden;
         }
         
         .chart-bar-fill {
             height: 100%;
-            border-radius: 15px;
+            border-radius: 18px;
             transition: width 0.8s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
         
-        .traditional-fill { background: #ff6b6b; }
-        .flexcore-fill { background: var(--primary); }
+        .traditional-fill { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
+        .flexcore-fill { background: var(--gradient-primary); }
         
         .chart-value {
             min-width: 80px;
-            font-weight: 600;
+            font-weight: 700;
             text-align: right;
+            color: var(--dark-color);
+            font-size: 1rem;
         }
         
         .breakdown-list {
             list-style: none;
             padding: 0;
+            background: var(--light-color);
+            border-radius: 12px;
+            padding: 1.5rem;
         }
         
         .breakdown-list li {
             display: flex;
             justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 500;
+        }
+
+        .breakdown-list li:last-child {
+            border-bottom: none;
+            border-top: 2px solid var(--primary-color);
+            font-weight: 700;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            padding-top: 1rem;
         }
         
         .environmental-impact {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--gradient-secondary);
             color: white;
             padding: 2rem;
-            border-radius: 1rem;
+            border-radius: 16px;
             margin-top: 2rem;
             text-align: center;
+        }
+
+        .impact-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-subtitle {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
         }
         
         .impact-stats {
@@ -159,14 +408,48 @@
         
         .impact-stat {
             text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
         }
         
         .impact-number {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 800;
             display: block;
+            margin-bottom: 0.25rem;
         }
-        
+
+        .impact-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            width: 100%;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .cta-button:hover {
+            background: #0d9488;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             .calculator-container {
                 grid-template-columns: 1fr;
@@ -176,36 +459,57 @@
             .results-panel {
                 position: static;
             }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+
+            .impact-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .calculator-form,
+            .results-panel {
+                padding: 1.5rem;
+            }
+
+            .savings-amount {
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav id="navbar" class="navbar">
-        <div class="container">
-            <div class="nav-container">
-                <div class="nav-brand">
-                    <img src="https://i.imgur.com/rQJ8wvO.png" alt="FlexCore Logo" class="nav-logo">
-                    <span class="nav-title">FlexCore</span>
-                </div>
-                
-                <div class="nav-menu" id="nav-menu">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <a href="products.html" class="nav-link">Products</a>
-                    <a href="index.html#features" class="nav-link">Features</a>
-                    <a href="index.html#support" class="nav-link">Support</a>
-                </div>
-                
-                <div class="nav-actions">
-                    <button class="cart-btn" onclick="toggleCart()">
-                        🛒 <span class="cart-badge">0</span>
-                    </button>
-                    <button class="nav-toggle" id="nav-toggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">FlexCore</a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="products.html" class="nav-link">Products</a></li>
+                <li><a href="cost-effective.html" class="nav-link" style="color: var(--primary-color);">Cost Calculator</a></li>
+                <li><a href="space-saving.html" class="nav-link">Space Saving</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="cart-icon" onclick="openCheckout()">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count" class="cart-count">0</span>
             </div>
         </div>
     </nav>
@@ -213,8 +517,8 @@
     <!-- Calculator Hero -->
     <section class="calculator-hero">
         <div class="container">
-            <h1>💰 Cost-Effective Calculator</h1>
-            <p>See how much money you can save with FlexCore's modular system compared to buying multiple traditional shoes</p>
+            <h1 class="hero-title">💰 Cost-Effective Calculator</h1>
+            <p class="hero-subtitle">Discover exactly how much money you can save with FlexCore's revolutionary modular system compared to buying multiple traditional shoes.</p>
         </div>
     </section>
 
@@ -225,10 +529,10 @@
                 
                 <!-- Calculator Form -->
                 <div class="calculator-form">
-                    <h3>Your Shoe Preferences</h3>
+                    <h3 class="form-title">Your Shoe Preferences</h3>
                     
                     <div class="form-group">
-                        <label>How many different shoe styles do you typically own?</label>
+                        <label><i class="fas fa-shoe-prints"></i> How many different shoe styles do you typically own?</label>
                         <div class="slider-group">
                             <input type="range" class="slider" id="shoeCount" min="3" max="20" value="8" oninput="updateCalculation()">
                             <div class="slider-value" id="shoeCountValue">8 pairs</div>
@@ -236,7 +540,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label>Average price you spend per pair of shoes</label>
+                        <label><i class="fas fa-dollar-sign"></i> Average price you spend per pair of shoes</label>
                         <div class="slider-group">
                             <input type="range" class="slider" id="avgPrice" min="50" max="300" value="120" oninput="updateCalculation()">
                             <div class="slider-value" id="avgPriceValue">$120</div>
@@ -244,7 +548,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label>How often do you replace your shoes? (years)</label>
+                        <label><i class="fas fa-calendar-alt"></i> How often do you replace your shoes? (years)</label>
                         <div class="slider-group">
                             <input type="range" class="slider" id="replaceFreq" min="1" max="5" value="2" step="0.5" oninput="updateCalculation()">
                             <div class="slider-value" id="replaceFreqValue">2 years</div>
@@ -252,41 +556,50 @@
                     </div>
                     
                     <div class="form-group">
-                        <label>Which activities do you need shoes for?</label>
-                        <div style="margin-top: 1rem;">
-                            <label style="display: flex; align-items: center; margin: 0.5rem 0;">
-                                <input type="checkbox" checked onchange="updateCalculation()"> Running/Exercise
-                            </label>
-                            <label style="display: flex; align-items: center; margin: 0.5rem 0;">
-                                <input type="checkbox" checked onchange="updateCalculation()"> Casual/Everyday
-                            </label>
-                            <label style="display: flex; align-items: center; margin: 0.5rem 0;">
-                                <input type="checkbox" onchange="updateCalculation()"> Formal/Business
-                            </label>
-                            <label style="display: flex; align-items: center; margin: 0.5rem 0;">
-                                <input type="checkbox" onchange="updateCalculation()"> Sports/Cleats
-                            </label>
-                            <label style="display: flex; align-items: center; margin: 0.5rem 0;">
-                                <input type="checkbox" onchange="updateCalculation()"> Winter/Boots
-                            </label>
+                        <label><i class="fas fa-running"></i> Which activities do you need shoes for?</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="running" checked onchange="updateCalculation()">
+                                <label for="running">🏃‍♀️ Running/Exercise</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="casual" checked onchange="updateCalculation()">
+                                <label for="casual">👟 Casual/Everyday</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="formal" onchange="updateCalculation()">
+                                <label for="formal">👔 Formal/Business</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sports" onchange="updateCalculation()">
+                                <label for="sports">⚽ Sports/Cleats</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="winter" onchange="updateCalculation()">
+                                <label for="winter">🥾 Winter/Boots</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="specialty" onchange="updateCalculation()">
+                                <label for="specialty">🛼 Specialty/Roller</label>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Results Panel -->
                 <div class="results-panel">
-                    <h3>Your Savings with FlexCore</h3>
+                    <h3 class="results-title">Your FlexCore Savings</h3>
                     
                     <div class="savings-display">
-                        <div class="savings-amount" id="totalSavings">$0</div>
-                        <div>Total Savings Over 5 Years</div>
+                        <span class="savings-amount" id="totalSavings">$0</span>
+                        <div class="savings-label">Total Savings Over 5 Years</div>
                     </div>
                     
                     <div class="comparison-chart">
                         <div class="chart-bar">
                             <div class="chart-label">Traditional</div>
                             <div class="chart-bar-bg">
-                                <div class="chart-bar-fill traditional-fill" id="traditionalBar"></div>
+                                <div class="chart-bar-fill traditional-fill" id="traditionalBar">$0</div>
                             </div>
                             <div class="chart-value" id="traditionalCost">$0</div>
                         </div>
@@ -294,32 +607,37 @@
                         <div class="chart-bar">
                             <div class="chart-label">FlexCore</div>
                             <div class="chart-bar-bg">
-                                <div class="chart-bar-fill flexcore-fill" id="flexcoreBar"></div>
+                                <div class="chart-bar-fill flexcore-fill" id="flexcoreBar">$0</div>
                             </div>
                             <div class="chart-value" id="flexcoreCost">$0</div>
                         </div>
                     </div>
                     
-                    <h4>Cost Breakdown</h4>
+                    <h4 style="margin-bottom: 1rem; color: var(--dark-color);">Cost Breakdown</h4>
                     <ul class="breakdown-list" id="breakdown">
                         <!-- Populated by JavaScript -->
                     </ul>
                     
+                    <button class="cta-button" onclick="window.location.href='products.html'">
+                        <i class="fas fa-shopping-bag"></i>
+                        Start Saving with FlexCore
+                    </button>
+                    
                     <div class="environmental-impact">
-                        <h4>🌍 Environmental Impact</h4>
-                        <p>By choosing FlexCore, you're also helping the environment!</p>
+                        <h4 class="impact-title">🌱 Environmental Impact</h4>
+                        <p class="impact-subtitle">By choosing FlexCore, you're helping the planet too!</p>
                         <div class="impact-stats">
                             <div class="impact-stat">
                                 <span class="impact-number" id="shoesReduced">0</span>
-                                <span>Fewer Shoes</span>
+                                <span class="impact-label">Fewer Shoes</span>
                             </div>
                             <div class="impact-stat">
                                 <span class="impact-number" id="wasteReduced">0</span>
-                                <span>lbs Waste Saved</span>
+                                <span class="impact-label">lbs Waste Saved</span>
                             </div>
                             <div class="impact-stat">
                                 <span class="impact-number" id="co2Reduced">0</span>
-                                <span>lbs CO₂ Saved</span>
+                                <span class="impact-label">lbs CO₂ Saved</span>
                             </div>
                         </div>
                     </div>
@@ -329,11 +647,42 @@
     </section>
 
     <script>
+        let cart = JSON.parse(localStorage.getItem('flexcore_cart')) || [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartUI();
+            updateCalculation();
+        });
+
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            if (cartCount) {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCount.textContent = totalItems;
+            }
+        }
+
+        function openCheckout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty! Add some products first.');
+                return;
+            }
+            
+            localStorage.setItem('flexcore_cart', JSON.stringify(cart));
+            window.location.href = 'checkout.html';
+        }
+
         function updateCalculation() {
             // Get form values
             const shoeCount = document.getElementById('shoeCount').value;
             const avgPrice = document.getElementById('avgPrice').value;
             const replaceFreq = document.getElementById('replaceFreq').value;
+            
+            // Count selected activities
+            const activities = ['running', 'casual', 'formal', 'sports', 'winter', 'specialty'];
+            const selectedActivities = activities.filter(activity => 
+                document.getElementById(activity).checked
+            ).length;
             
             // Update slider displays
             document.getElementById('shoeCountValue').textContent = shoeCount + ' pairs';
@@ -347,17 +696,17 @@
             // Traditional shoe cost
             const traditionalCost = shoeCount * avgPrice * replacementCycles;
             
-            // FlexCore cost (1 base shoe + cores)
+            // FlexCore cost calculation
             const baseShoeCost = 59.99;
             const corePrice = 19.99;
-            const coreCount = Math.min(shoeCount, 10); // Max 10 core types available
+            const coreCount = Math.max(selectedActivities, Math.min(shoeCount, 10));
             const flexcoreCost = (baseShoeCost + (coreCount * corePrice)) * replacementCycles;
             
             // Calculate savings
-            const savings = traditionalCost - flexcoreCost;
+            const savings = Math.max(0, traditionalCost - flexcoreCost);
             
             // Update displays
-            document.getElementById('totalSavings').textContent = '$' + Math.max(0, savings).toFixed(0);
+            document.getElementById('totalSavings').textContent = '$' + savings.toFixed(0);
             document.getElementById('traditionalCost').textContent = '$' + traditionalCost.toFixed(0);
             document.getElementById('flexcoreCost').textContent = '$' + flexcoreCost.toFixed(0);
             
@@ -366,8 +715,13 @@
             const traditionalWidth = (traditionalCost / maxCost) * 100;
             const flexcoreWidth = (flexcoreCost / maxCost) * 100;
             
-            document.getElementById('traditionalBar').style.width = traditionalWidth + '%';
-            document.getElementById('flexcoreBar').style.width = flexcoreWidth + '%';
+            const traditionalBar = document.getElementById('traditionalBar');
+            const flexcoreBar = document.getElementById('flexcoreBar');
+            
+            traditionalBar.style.width = traditionalWidth + '%';
+            flexcoreBar.style.width = flexcoreWidth + '%';
+            traditionalBar.textContent = '$' + traditionalCost.toFixed(0);
+            flexcoreBar.textContent = '$' + flexcoreCost.toFixed(0);
             
             // Update breakdown
             const breakdown = document.getElementById('breakdown');
@@ -375,21 +729,18 @@
                 <li><span>Traditional Shoes (${shoeCount} pairs)</span><span>$${traditionalCost.toFixed(0)}</span></li>
                 <li><span>FlexCore Base Shoe</span><span>$${(baseShoeCost * replacementCycles).toFixed(0)}</span></li>
                 <li><span>FlexCore Cores (${coreCount} types)</span><span>$${(coreCount * corePrice * replacementCycles).toFixed(0)}</span></li>
-                <li style="border-top: 2px solid var(--primary); font-weight: 700; color: var(--accent);"><span>Your Savings</span><span>$${Math.max(0, savings).toFixed(0)}</span></li>
+                <li><span>💰 Your Total Savings</span><span>$${savings.toFixed(0)}</span></li>
             `;
             
             // Environmental impact
             const shoesReduced = Math.max(0, shoeCount - 1) * replacementCycles;
-            const wasteReduced = shoesReduced * 2.5; // Average shoe weight
-            const co2Reduced = shoesReduced * 30; // CO2 per shoe production
+            const wasteReduced = shoesReduced * 2.5; // Average shoe weight in lbs
+            const co2Reduced = shoesReduced * 30; // CO2 per shoe production in lbs
             
             document.getElementById('shoesReduced').textContent = Math.round(shoesReduced);
             document.getElementById('wasteReduced').textContent = Math.round(wasteReduced);
             document.getElementById('co2Reduced').textContent = Math.round(co2Reduced);
         }
-        
-        // Initialize calculation on page load
-        document.addEventListener('DOMContentLoaded', updateCalculation);
     </script>
 </body>
 </html>
